@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# CareSpan Health
 
-Let's discover **Docusaurus in less than 5 minutes**.
+This is the documentation to dive into the data stored on CareSpan
 
 ## Getting Started
 
