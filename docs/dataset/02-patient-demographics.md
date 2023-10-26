@@ -2,13 +2,15 @@
 
 ## CareSpan Format V1
 
-The CareSpan format will be generated in JSON format with the following fields
+The CareSpan format will be generated in `JSON` format with the following fields
 
-### Patient`:object`
+### Patient: `object`
 
 | Field | Type | Description | Comment |
 |-------|-------------|---|---|
 | `active` | `number` | Whether the user is active? | `1` for active<br/>  `0` for inactive |
+| `uid` | `number` | Unique User ID | This is for internal use |
+| `mrn` | `string` | Unique Medical Record Number | This is for external use |
 | `username` | `string` | User Name |-|
 | `nickname` | `string` | Nick Name |-|
 | `previousname` | `string` | Previous Name (name used before) |-|
@@ -19,7 +21,6 @@ The CareSpan format will be generated in JSON format with the following fields
 | `maiden_name` | `string` | Maiden Name |-|
 | `lname` | `string` | Last Name |-|
 | `post` | `string` | Postfix Name |Examples: `PhD`, `CPA`|
-| `mrn` | `string` | Medical Record Number |-|
 | `email` | `string` | E-mail |-|
 | `ssn` | `sting` | Social Security Number  |-|
 | `tz` | `string` | Time Zone |-|
@@ -68,7 +69,7 @@ The CareSpan format will be generated in JSON format with the following fields
 | `secondary_payers_insurance` | `array<Insurer>` | List of Secondary Insurance (include inactive ones)  | Check `insurer` section [link](#insurer) |
 | `tetiary_payers_insurance` | `array<Insurer>` | List of Tetiary Insurance (include inactive ones)  | Check `insurer` section [link](#insurer) |
 
-### Contact`:object`
+### Contact: `object`
 | Field | Type | Description | Comment |
 |-------|-------------|---|---|
 | `name` | `string` | The name of the user |-|
@@ -91,7 +92,7 @@ The CareSpan format will be generated in JSON format with the following fields
 | `priority` | `number` | Priority |-|
 
 
-### Insurer`:object`
+### Insurer: `object`
 | Field | Type | Description | Comment |
 |-------|-------------|---|---|
 | `icompany` | `string` | The name of the insurance company |-|

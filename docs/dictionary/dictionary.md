@@ -4,7 +4,9 @@ sidebar_position: 1
 
 # Dictionary
 
-## Smoker v1
+## For Patient
+
+### Smoker v1
 
 | key | message                        |
 | --- | ------------------------------ |
@@ -25,7 +27,7 @@ FROM `messages`
 WHERE (`category` = 'smoker') AND (`lang` = 'en')
 ```
 
-## Gender v1
+### Gender v1
 
 | key | message |
 | --- | ------- |
@@ -42,7 +44,7 @@ WHERE (`category` = 'gender') AND (`lang` = 'en')
 ORDER by `key`
 ```
 
-## Gender Identity
+### Gender Identity
 
 | key | message                                               |
 | --- | ----------------------------------------------------- |
@@ -63,7 +65,7 @@ WHERE (`category` = 'genderidentity') AND (`lang` = 'en')
 ORDER by `key`
 ```
 
-## Gender Orientation
+### Gender Orientation
 
 | key | message                         |
 | --- | ------------------------------- |
@@ -83,7 +85,7 @@ WHERE (`dictionary_types_id` = '34') AND (`language` = 'en')
 ORDER by `key`
 ```
 
-## Race
+### Race
 
 | key | message                                   |
 | --- | ----------------------------------------- |
@@ -106,7 +108,7 @@ ORDER BY `key`
 
 ```
 
-## Ethnicity
+### Ethnicity
 
 | key | message                 |
 | --- | ----------------------- |
@@ -165,7 +167,7 @@ WHERE (`dictionary_types_id` = '36') AND (`language` = 'en')
 ORDER by `key`
 ```
 
-## Blood Type
+### Blood Type
 
 | key | message |
 | --- | ------- |
@@ -188,7 +190,8 @@ WHERE (`category` = 'bloodtype') AND (`lang` = 'en')
 ORDER BY `key`
 
 ```
-## Marital
+
+### Marital
 
 | key | message     |
 | --- | ----------- |
@@ -209,7 +212,7 @@ WHERE (`category` = 'marital') AND (`lang` = 'en')
 ORDER BY `key`
 ```
 
-## Religion
+### Religion
 
 | key | message                                |
 | --- | -------------------------------------- |
@@ -306,8 +309,7 @@ WHERE (`dictionary_types_id` = '35') AND (`language` = 'en')
 ORDER by `key`
 ```
 
-
-## Relationship Types
+### Relationship Types
 
 | key | message                                             |
 | --- | --------------------------------------------------- |
@@ -339,6 +341,75 @@ ORDER by `key`
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
 WHERE (`dictionary_types_id` = '30') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+## For Billing
+
+### Transaction Type
+
+| key | message                 |
+| --- | ----------------------- |
+| 0   | none                    |
+| 1   | check-in                |
+| 2   | check-out               |
+| 3   | on account              |
+| 4   | by patient              |
+| 5   | dpc enroll              |
+| 6   | dpc subscription        |
+| 7   | copay                   |
+| 8   | refund                  |
+| 9   | billing adjustment      |
+| 10  | PRMS billing adjustment |
+
+```sql
+-- Table: transactions_types
+SELECT `transaction_type` as `key`, `description` as `message`
+FROM `transactions_types`
+ORDER BY `key`
+```
+
+### Billable Type
+
+| key | message      |
+| --- | ------------ |
+| 0   | insurance    |
+| 1   | patient-pay  |
+| 3   | prv          |
+| 4   | dpc          |
+| 5   | patient-resp |
+| 6   | refund       |
+| 7   | prompt-pay   |
+
+```sql
+-- Table: billable_types
+SELECT `billable_type` as `key`, `description` as `message`
+FROM `billable_types`
+ORDER BY `key`
+```
+
+### Billing Status
+
+| key | message              |
+| --- | -------------------- |
+| 0   | Not Billed           |
+| 1   | Billed               |
+| 2   | Paid in Full         |
+| 3   | Questions            |
+| 4   | Billing Code Changed |
+| 8   | Not Charged          |
+| 9   | Ignore               |
+| 11  | Unbilled             |
+| 12  | Rebilled             |
+| 13  | Billed to DPC        |
+
+```sql
+-- Table: dictionaries
+-- dictionary_types_id: 93
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '93') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
