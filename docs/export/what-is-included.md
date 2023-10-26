@@ -2,7 +2,11 @@
 sidebar_position: 1
 ---
 
-# Deploy your site
+# What is included?
+
+The exported data
+
+The designated Electronic Health Information (EHI) record sets
 
 Docusaurus is a **static-site-generator** (also called **[Jamstack](https://jamstack.org/)**).
 

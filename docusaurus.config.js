@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'CareSpan',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  tagline: 'Integrated Digital Care',
+  favicon: 'img/carespan-favicon.ico',
 
   // Set the production url of your site here
   url: 'https://carespan-health.github.io',
@@ -65,10 +65,10 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: '',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'CareSpan Logo',
+          src: 'img/carespan-logo.png',
         },
         items: [
           {
@@ -77,7 +77,7 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/CareSpan-Health/dataset',
             label: 'GitHub',
@@ -89,7 +89,20 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Site',
+            title: 'CareSpan',
+            items: [
+              {
+                label: 'CareSpan Health',
+                href: 'https://www.carespanhealth.com',
+              },
+              {
+                label: 'CareSpan Virtual Clinic',
+                href: 'https://www.carespan.clinic',
+              }
+            ],
+          },
+          {
+            title: 'Developer',
             items: [
               {
                 label: 'Docs',
@@ -98,35 +111,20 @@ const config = {
             ],
           },
           {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
+              // {
+              //   label: 'Blog',
+              //   to: '/blog',
+              // },
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',
               },
             ],
           },
+          {},
+          {}
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
