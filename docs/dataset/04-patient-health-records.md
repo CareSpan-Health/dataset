@@ -313,7 +313,7 @@ For example, a patient maybe have a "fever" thread to treat the "fever" over 5 c
 | IMO Description               | Text      | imodesc                       |                                                                                                                           |
 | NIH Code                      | Text      | nihcode                       |                                                                                                                           |
 
-#### Retired Fields
+#### Retired Fields (Medical Problems)
 
 | Name                       | Type | Field      | Description |
 | -------------------------- | ---- | ---------- | ----------- |
@@ -332,6 +332,31 @@ For example, a patient maybe have a "fever" thread to treat the "fever" over 5 c
 | Sev1:Inq,2:Susp,3:Prble,4:Conf | Text      | covid_status  |             |
 | Diagnosis Codes                | Text      | medicardcode  |             |
 | Diagnosis Description          | Text      | medicarddesc  |             |
+
+### `008` Immunizations: `object`
+
+| Name                           | Type           | Field                   | Description                                                                           |
+| ------------------------------ | -------------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| Immunizations                  | Text           | immunization            | This is the name of the immunization                                                  |
+| BasicImmunizations             | Dictionary Key | immunizationkey         | Check `Immunization List` dictionary [link](/docs/dictionary#immunization-list)       |
+| Start Date                     | Date           | sdate                   | Given Date                                                                            |
+| Expiration Date                | Date           | expdate                 | Expiration Date                                                                       |
+| Next Dose Due Date             | Date           | next_dose_date          | Next Dose Due Date                                                                    |
+| Informed Consent Signed (Bool) | Integer        | informed_consent_signed | `1` Signed<br/>`0` Not Signed                                                         |
+| Lot Number                     | Text           | lotnum                  |                                                                                       |
+| NDC                            | Text           | ndc                     |                                                                                       |
+| Manufacturer                   | Text           | manufacturer            |                                                                                       |
+| Refused                        | Integer        | refused_key             | Check `Immunization Rejects` dictionary [link](/docs/dictionary#immunization-rejects) |
+| Status                         | Text Area      | status                  | Check `Immunization Status` dictionary [link](/docs/dictionary#immunization-status)   |
+| Status Reason                  | Text           | reason                  |                                                                                       |
+
+#### Retired Fields (Immunizations)
+
+| Name               | Type    | Field     | Description |
+| ------------------ | ------- | --------- | ----------- |
+| End Date           | Date    | edate     |             |
+| Immunization Key   | Integer | data_key  |             |
+| Fhir CodingConcept | Json    | fhir_code |             |
 
 ### `009` Lab Results: `object`
 
