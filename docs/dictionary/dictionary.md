@@ -503,13 +503,13 @@ ORDER by `key`
 
 #### For Self-Reporting
 
-| key | message          |
-| --- | ---------------- |
-| 1   | Active           |
-| 2   | Inactive         |
-| 3   | Discontinued     |
-| 4   | Deleted          |
-| 5   | Completed        |
+| key | message      |
+| --- | ------------ |
+| 1   | Active       |
+| 2   | Inactive     |
+| 3   | Discontinued |
+| 4   | Deleted      |
+| 5   | Completed    |
 
 #### For Others, the following are added
 
@@ -584,47 +584,65 @@ Classification from **_DoseSpot_** (3rd Party)
 
 ### Drug Classification
 
-| key | message              |
-| --- | -------------------- |
-|`miscellaneous antipsychotic agents`| - |
-|`psychotherapeutic combinations`| - |
-|`phenothiazine antipsychotics`| - |
-|`psychotherapeutic agents`| - |
-|`antipsychotics`| - |
-|`atypical antipsychotics`| - |
-|`Antipsychotic Agent Benzamide`| - |
-|`Antipsychotic Agent Benzisoxazole`| - |
-|`Antipsychotic Agent Benzothiazolylpiperazine`| - |
-|`Antipsychotic Agent Benzylisothiazolylpiperazine`| - |
-|`Antipsychotic Agent Butyrophenone`| - |
-|`Antipsychotic Agent Dibenzodiazepine`| - |
-|`Antipsychotic Agent Dibenzothiazepine`| - |
-|`Antipsychotic Agent Dibenzoxazepine`| - |
-|`Antipsychotic Agent Dihydroindoline`| - |
-|`Antipsychotic Agent Diphenylbutylperidine`| - |
-|`Antipsychotic Agent Phenothiazine Aliphatic`| - |
-|`Antipsychotic Agent Phenothiazine Piperazine`| - |
-|`Antipsychotic Agent Phenothiazine Piperidine`| - |
-|`Antipsychotic Agent Thienobenzodiazepine`| - |
-|`Antipsychotic Agent Thioxanthene Derivative`| - |
-|`Antipsychotic Agent`| - |
-|`Benzisoxazole (Antipsychotic)`| - |
-|`Butyrophenone Derivative (Antipsychotic)`| - |
-|`Dibenzodiazepine (Antipsychotic)`| - |
-|`Dibenzoxazepine (Antipsychotic)`| - |
-|`Dihydroindoline (Antipsychotic)`| - |
-|`Psychostimulant`| - |
-|`Antipsychotic Agent Quinolinone`| - |
-|`Second Generation (Atypical) Antipsychotic`| - |
-|`First Generation (Typical) Antipsychotic`| - |
-|`Antipsychotic Agent Typical Phenothiazine`| - |
-|`Antipsychotic Agent Typical Phenothiazine Piperidine`| - |
+| key                                                    | message |
+| ------------------------------------------------------ | ------- |
+| `miscellaneous antipsychotic agents`                   | -       |
+| `psychotherapeutic combinations`                       | -       |
+| `phenothiazine antipsychotics`                         | -       |
+| `psychotherapeutic agents`                             | -       |
+| `antipsychotics`                                       | -       |
+| `atypical antipsychotics`                              | -       |
+| `Antipsychotic Agent Benzamide`                        | -       |
+| `Antipsychotic Agent Benzisoxazole`                    | -       |
+| `Antipsychotic Agent Benzothiazolylpiperazine`         | -       |
+| `Antipsychotic Agent Benzylisothiazolylpiperazine`     | -       |
+| `Antipsychotic Agent Butyrophenone`                    | -       |
+| `Antipsychotic Agent Dibenzodiazepine`                 | -       |
+| `Antipsychotic Agent Dibenzothiazepine`                | -       |
+| `Antipsychotic Agent Dibenzoxazepine`                  | -       |
+| `Antipsychotic Agent Dihydroindoline`                  | -       |
+| `Antipsychotic Agent Diphenylbutylperidine`            | -       |
+| `Antipsychotic Agent Phenothiazine Aliphatic`          | -       |
+| `Antipsychotic Agent Phenothiazine Piperazine`         | -       |
+| `Antipsychotic Agent Phenothiazine Piperidine`         | -       |
+| `Antipsychotic Agent Thienobenzodiazepine`             | -       |
+| `Antipsychotic Agent Thioxanthene Derivative`          | -       |
+| `Antipsychotic Agent`                                  | -       |
+| `Benzisoxazole (Antipsychotic)`                        | -       |
+| `Butyrophenone Derivative (Antipsychotic)`             | -       |
+| `Dibenzodiazepine (Antipsychotic)`                     | -       |
+| `Dibenzoxazepine (Antipsychotic)`                      | -       |
+| `Dihydroindoline (Antipsychotic)`                      | -       |
+| `Psychostimulant`                                      | -       |
+| `Antipsychotic Agent Quinolinone`                      | -       |
+| `Second Generation (Atypical) Antipsychotic`           | -       |
+| `First Generation (Typical) Antipsychotic`             | -       |
+| `Antipsychotic Agent Typical Phenothiazine`            | -       |
+| `Antipsychotic Agent Typical Phenothiazine Piperidine` | -       |
 
 :::warning
 
 Classification from **_DoseSpot_** (3rd Party)
 
 :::
+
+### Problem Status
+
+| key | message      |
+| --- | ------------ |
+| 1   | Uncontrolled |
+| 2   | Controlled   |
+| 3   | Resolved     |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 41
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '41') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
 
 ## For Review of Systems
 
@@ -831,22 +849,22 @@ ORDER BY `type`
 
 ### For Naming Systems
 
-| key | code | OID | uri | description |
-| --- | --- | --- |---| --- |
-| `{{rxnorm}}` | RxNorm | 2.16.840.1.113883.6. | http://www.nlm.nih.gov/research/umls/rxnorm | The actual RXCUI for the RxNorm |
-| `{{cpt}}`  | CPT | 2.16.840.1.113883.6.12 | http://www.ama-assn.org/go/cpt | |
-| `{{snomed_ct_int}}`  | SNOMED_CT_INT | 2.16.840.1.113883.6.96 | http://snomed.info/sct | |
-| `{{icd10cm}}`  | Icd10CM | 2.16.840.1.113883.6.90 | http://hl7.org/fhir/sid/icd-10-cm | |
-| `{{hcpcs}}`  | HCPCS | 2.16.840.1.113883.6.285 | https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets | |
-| `{{cvx}}`  | CVX | 2.16.840.1.113883.12.292 | http://hl7.org/fhir/sid/cvx | |
-| `{{loinc}}`  | LOINC | 2.16.840.1.113883.6.1 | http://loinc.org | |
-| `{{}}`  | PH_ProviderCodes_NUCC | 2.16.840.1.113883.6.101 | http://nucc.org/provider-taxonomy| |
+| key                 | code                  | OID                      | uri                                                      | description                     |
+| ------------------- | --------------------- | ------------------------ | -------------------------------------------------------- | ------------------------------- |
+| `{{rxnorm}}`        | RxNorm                | 2.16.840.1.113883.6.     | http://www.nlm.nih.gov/research/umls/rxnorm              | The actual RXCUI for the RxNorm |
+| `{{cpt}}`           | CPT                   | 2.16.840.1.113883.6.12   | http://www.ama-assn.org/go/cpt                           |                                 |
+| `{{snomed_ct_int}}` | SNOMED_CT_INT         | 2.16.840.1.113883.6.96   | http://snomed.info/sct                                   |                                 |
+| `{{icd10cm}}`       | Icd10CM               | 2.16.840.1.113883.6.90   | http://hl7.org/fhir/sid/icd-10-cm                        |                                 |
+| `{{hcpcs}}`         | HCPCS                 | 2.16.840.1.113883.6.285  | https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets |                                 |
+| `{{cvx}}`           | CVX                   | 2.16.840.1.113883.12.292 | http://hl7.org/fhir/sid/cvx                              |                                 |
+| `{{loinc}}`         | LOINC                 | 2.16.840.1.113883.6.1    | http://loinc.org                                         |                                 |
+| `{{}}`              | PH_ProviderCodes_NUCC | 2.16.840.1.113883.6.101  | http://nucc.org/provider-taxonomy                        |                                 |
 
 ### For Propietory Systems
 
-| key | description              | code | OID | uri |
-| --- | -------------------- | --- | --- |---|
-| `{{rxqdrug}}` |  **DoseSpot** Generic Drug Code | - | - | - |
+| key           | description                    | code | OID | uri |
+| ------------- | ------------------------------ | ---- | --- | --- |
+| `{{rxqdrug}}` | **DoseSpot** Generic Drug Code | -    | -   | -   |
 
 ## For Billing
 
