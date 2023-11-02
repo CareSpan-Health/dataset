@@ -24,7 +24,6 @@ The CareSpan format will be generated in `JSON` format with the following fields
 |By Patient?|Number|is_patient|Whether entered by patient<br/>`1` for yes<br/>  `0` for no|
 |Fields|Fields[]|fields|See below for the fields object|
 
-
 ### `001` Vital/Diagnostic Data: `object`
 
 #### Blood Pressue
@@ -156,50 +155,52 @@ The CareSpan format will be generated in `JSON` format with the following fields
 
 ### `005` Allergy: `object`
 
-| Name                          | Field       | Description  |
-|----------------------------------|---------------|---|
-| Allergy                          | allergy       | The name of the allergy? (e.g. **_Penicillin_**) |
-| Start Date                       | sdate         | When did the allergy start |
-| End Date                         | edate         | When did the allergy end |
-| Fhir Reaction                    | fhir_reaction | See `fhir_reaction` below [link](#allergyfhir_reaction-object) |
-| Reaction                         | reaction      | 1 |
-| Reaction - other                 | otherreaction | Description of allergy |
-| React-Type:Allergy/Intolerance   | reactiontype  | 1 |
-| Severity                         | severity      | 1 |
-| Severity Key                     | severitykey   | 1 |
-| Status (active,inactive,deleted) | status        | 1 |
-| Type                             | type          | 1 |                      |
+| Name                             | Type | Field       | Description  |
+|----------------------------------| --- |---------------|---|
+| Allergy                          | Text | allergy       | The name of the allergy? (e.g. **_Penicillin_**) |
+| Start Date                       | Date | sdate         | When did the allergy start |
+| End Date                         | Date | edate         | When did the allergy end |
+| Type                             | Dictionary Key | type          | Check `Allergy Types` dictionary [link](/docs/dictionary#allergy-types) |                      |
+| Fhir Reaction                    | Json | fhir_reaction | See `fhir_reaction` [below](#allergyfhir_reaction-object) |
+| Reaction                         | Code | reaction      |  Check `Allergy Reactions` dictionary [link](/docs/dictionary#allergy-reactions) |
+| Reaction - other                 | Dictionary Key | otherreaction | Free form allergy reaction |
+| React-Type:Allergy/Intolerance   | Code | reactiontype  | `allergy` \| `intolerance`  |
+| Severity                         | Dictionary Key | severity      | Check `Allergy Severity` dictionary [link](/docs/dictionary#allergy-severity) |
 
 #### Allergy.`fhir_reaction`: `object`
 
-```json
+Using a `JSON` structure to accomodate multiple options
+
+```js
+
 [
-    [
-        {
-            "substance": {
-                "coding": [
-                    {
-                        "code": "d08188",
-                        "display": "Anoro Ellipta",
-                        "system": "{{rxqdrug}}"
-                    },
-                    {
-                        "code": 1487518,
-                        "display": "Anoro Ellipta",
-                        "system": "{{rxnorm}}"
-                    }
-                ]
-            }
+    {
+        "substance": {
+            "coding": [
+                {
+                    "code": "d08188",
+                    "display": "Anoro Ellipta",
+                    "system": "{{rxqdrug}}"
+                },
+                {
+                    "code": 1487518,
+                    "display": "Anoro Ellipta",
+                    "system": "{{rxnorm}}"
+                }
+            ]
         }
-    ]
+    }
 ]
 ```
 
 | Name                            | Field                 | Description |
 |----------------------------------|---------------------|-------------|
-| Generic Drug Code                       | rxqdrug          | **DoseSpot** Generic Drug Code |
-| Amount                           | rxnorm              | The actual `RXCUI` for the RxNorm |
+| Reaction | `Reaction[]`| [Reaction (ext)](https://www.hl7.org/fhir/allergyintolerance-definitions.html#AllergyIntolerance.reaction)<br/>[BackboneElement (ext)](https://www.hl7.org/fhir/types.html#BackboneElement) |
+| Substance | `Reaction[].substance`| [CodeableConcept (ext)](https://www.hl7.org/fhir/datatypes.html#CodeableConcept) |
+| Coding | `Reaction[].substance.coding[]`| [Coding (ext)](https://www.hl7.org/fhir/datatypes.html#Coding) |
+| Coding System| `Reaction[].substance.coding[].system`| Check `Coding Systems` dictionary [link](/docs/dictionary#for-naming-systems)|
 
+#### Substance
 
 ### `006` Medications: `object`
 

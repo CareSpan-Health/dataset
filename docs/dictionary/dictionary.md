@@ -4,28 +4,7 @@ sidebar_position: 1
 
 # Dictionary
 
-## For Patient
-
-### Smoker v1
-
-| key | message                        |
-| --- | ------------------------------ |
-| 0   | Current every day smoker       |
-| 1   | Current some day smoker        |
-| 2   | Former smoker                  |
-| 3   | Never smoker                   |
-| 4   | Smoker, current status unknown |
-| 5   | Unknown if ever smoked         |
-| 6   | Current Heavy tobacco smoker   |
-| 7   | Current Light tobacco smoker   |
-
-```sql
--- Table: messages
--- Category: smoker
-SELECT `ckey` as `key`, `message`
-FROM `messages`
-WHERE (`category` = 'smoker') AND (`lang` = 'en')
-```
+## For Demographics
 
 ### Gender v1
 
@@ -165,30 +144,6 @@ SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
 WHERE (`dictionary_types_id` = '36') AND (`language` = 'en')
 ORDER by `key`
-```
-
-### Blood Type
-
-| key | message |
-| --- | ------- |
-| 0   | O+      |
-| 1   | O-      |
-| 2   | A+      |
-| 3   | A-      |
-| 4   | B+      |
-| 5   | B-      |
-| 6   | AB+     |
-| 7   | AB-     |
-
-```sql
--- Table: messages
--- Category: bloodtype
-SELECT 
-  `ckey` as `key`, `message`
-FROM `messages`
-WHERE (`category` = 'bloodtype') AND (`lang` = 'en')
-ORDER BY `key`
-
 ```
 
 ### Marital
@@ -368,6 +323,126 @@ ORDER by `key`
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
 WHERE (`dictionary_types_id` = '30') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+## For Health Record
+
+### Smoker v1
+
+| key | message                        |
+| --- | ------------------------------ |
+| 0   | Current every day smoker       |
+| 1   | Current some day smoker        |
+| 2   | Former smoker                  |
+| 3   | Never smoker                   |
+| 4   | Smoker, current status unknown |
+| 5   | Unknown if ever smoked         |
+| 6   | Current Heavy tobacco smoker   |
+| 7   | Current Light tobacco smoker   |
+
+```sql
+-- Table: messages
+-- Category: smoker
+SELECT `ckey` as `key`, `message`
+FROM `messages`
+WHERE (`category` = 'smoker') AND (`lang` = 'en')
+```
+
+### Blood Type
+
+| key | message |
+| --- | ------- |
+| 0   | O+      |
+| 1   | O-      |
+| 2   | A+      |
+| 3   | A-      |
+| 4   | B+      |
+| 5   | B-      |
+| 6   | AB+     |
+| 7   | AB-     |
+
+```sql
+-- Table: messages
+-- Category: bloodtype
+SELECT 
+  `ckey` as `key`, `message`
+FROM `messages`
+WHERE (`category` = 'bloodtype') AND (`lang` = 'en')
+ORDER BY `key`
+```
+
+### Allergy Types
+
+| key | message          |
+| --- | ---------------- |
+| 1   | Drug             |
+| 2   | Food             |
+| 3   | Insect           |
+| 4   | Latex            |
+| 5   | Mold             |
+| 6   | Pet              |
+| 7   | Pollen           |
+| 8   | Skin             |
+| 9   | Other            |
+| 10  | No Known Allergy |
+
+```sql
+-- Table: dictionaries
+-- dictionary_types_id: 25
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '25') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Allergy Reactions
+
+| key | message              |
+| --- | -------------------- |
+| 1   | Abdominal Pain       |
+| 2   | Anaphylactic Shock   |
+| 3   | Constipation         |
+| 4   | Diarrhea             |
+| 5   | Difficulty Breathing |
+| 6   | Dizziness            |
+| 7   | Headache             |
+| 8   | Itching              |
+| 9   | Joint Pain           |
+| 10  | Nausea/Vomiting      |
+| 11  | Palpitations         |
+| 12  | Rash/Hives           |
+| 13  | Swelling             |
+| 14  | Unknown              |
+| 15  | Other                |
+
+```sql
+-- Table: dictionaries
+-- dictionary_types_id: 68
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '68') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Allergy Severity
+
+| key | message          |
+| --- | ---------------- |
+| 1   | Mild             |
+| 2   | Moderate         |
+| 3   | Serious          |
+| 4   | Life Threatening |
+
+```sql
+-- Table: dictionaries
+-- dictionary_types_id: 88
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '88') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
@@ -572,6 +647,27 @@ SELECT
 FROM `review_of_system_types` WHERE (`language` = 'en') AND (`active` = '1')
 ORDER BY `type`
 ```
+
+## Coding Systems
+
+### For Naming Systems
+
+| key | code | OID | uri | description |
+| --- | --- | --- |---| --- |
+| `{{rxnorm}}` | RxNorm | 2.16.840.1.113883.6. | http://www.nlm.nih.gov/research/umls/rxnorm | The actual RXCUI for the RxNorm |
+| `{{cpt}}`  | CPT | 2.16.840.1.113883.6.12 | http://www.ama-assn.org/go/cpt | |
+| `{{snomed_ct_int}}`  | SNOMED_CT_INT | 2.16.840.1.113883.6.96 | http://snomed.info/sct | |
+| `{{icd10cm}}`  | Icd10CM | 2.16.840.1.113883.6.90 | http://hl7.org/fhir/sid/icd-10-cm | |
+| `{{hcpcs}}`  | HCPCS | 2.16.840.1.113883.6.285 | https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets | |
+| `{{cvx}}`  | CVX | 2.16.840.1.113883.12.292 | http://hl7.org/fhir/sid/cvx | |
+| `{{loinc}}`  | LOINC | 2.16.840.1.113883.6.1 | http://loinc.org | |
+| `{{}}`  | PH_ProviderCodes_NUCC | 2.16.840.1.113883.6.101 | http://nucc.org/provider-taxonomy| |
+
+### For Propietory Systems
+
+| key | description              | code | OID | uri |
+| --- | -------------------- | --- | --- |---|
+| `{{rxqdrug}}` |  **DoseSpot** Generic Drug Code | - | - | - |
 
 ## For Billing
 
