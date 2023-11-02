@@ -104,7 +104,7 @@ The CareSpan format will be generated in `JSON` format with the following fields
 | `icity` | `string` | City for the insurance company |-|
 | `istate` | `string` | State for the insurance company |-|
 | `ipostalcode` | `string` | Zip Code for the insurance company |-|
-| `isubscriber_relationship` | `string` | Subscriber's relationship to the patient |Check `Relationship Types` dictionary [link](/docs/dictionary#relationship-types)|
+| `isubscriber_relationship` | `string` | Subscriber's relationship to the patient |Check `Relationship Types V2` dictionary [link](/docs/dictionary#relationship-types-v2)|
 | `isubscriber_fname` | `string` | Subscriber's First Name |-|
 | `isubscriber_lname` | `string` | Subscriber's Last Name |-|
 | `isubscriber_dob` | `string` | Subscriber's Date of Birth |-|

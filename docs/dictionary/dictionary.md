@@ -309,7 +309,34 @@ WHERE (`dictionary_types_id` = '35') AND (`language` = 'en')
 ORDER by `key`
 ```
 
-### Relationship Types
+### Relationship Types v1
+
+| key | message              |
+| --- | -------------------- |
+| 0   | Maternal Grandmother |
+| 1   | Maternal Grandfather |
+| 2   | Mother               |
+| 3   | Father               |
+| 4   | Sister               |
+| 5   | Brother              |
+| 6   | Child                |
+| 7   | Other                |
+| 8   | Paternal Grandfather |
+| 9   | Paternal Grandmother |
+| 10  | Aunt                 |
+| 11  | Uncle                |
+
+```sql
+-- Table: dictionaries
+-- dictionary_types_id: 27
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '27') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Relationship Types v2
 
 | key | message                                             |
 | --- | --------------------------------------------------- |
@@ -343,6 +370,207 @@ FROM `ref_dictionaries`
 WHERE (`dictionary_types_id` = '30') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
+```
+
+## For Review of Systems
+
+### Review of Systems
+
+| type | key | label                             |
+| ---- | --- | --------------------------------- |
+| 1    | 0   | Chills/Sweats                     |
+| 1    | 1   | Fatigue                           |
+| 1    | 2   | Fever                             |
+| 1    | 3   | Feeling Unwell                    |
+| 1    | 4   | Weight Gain/Loss                  |
+| 1    | 99  | Other                             |
+| 2    | 0   | Cough                             |
+| 2    | 1   | TB Exposure                       |
+| 2    | 2   | Shortness of Breath               |
+| 2    | 3   | Wheezing                          |
+| 2    | 99  | Other                             |
+| 3    | 0   | Anxiety/Restlessness              |
+| 3    | 1   | Depression                        |
+| 3    | 2   | Insomnia                          |
+| 3    | 3   | Trouble Concentrating/Confusion   |
+| 3    | 4   | Hopelessness                      |
+| 3    | 5   | Change in Alcohol/Drug Use        |
+| 3    | 6   | Hallucinations                    |
+| 3    | 7   | Paranoia                          |
+| 3    | 8   | Suicidal Thinking                 |
+| 3    | 9   | Thoughts of Harming Others        |
+| 3    | 99  | Other                             |
+| 4    | 0   | Chest Pain/Pressure               |
+| 4    | 1   | Irregular Heartbeat/Palpitations  |
+| 4    | 2   | Swelling in Legs/Ankles           |
+| 4    | 99  | Other                             |
+| 5    | 0   | Dizziness                         |
+| 5    | 1   | Extremity Numbness/Tingling       |
+| 5    | 2   | Seizures                          |
+| 5    | 3   | Headache/Migraine                 |
+| 5    | 4   | Memory Loss                       |
+| 5    | 5   | Gait Disturbance/Balance Problems |
+| 5    | 99  | Other                             |
+| 5    | 100 | Fainting                          |
+| 6    | 0   | Easy Bleeding                     |
+| 6    | 1   | Easy Bruising                     |
+| 6    | 2   | Swollen Lymph Nodes               |
+| 6    | 99  | Other                             |
+| 7    | 0   | Double/Blurred Vision             |
+| 7    | 2   | Redness/Discharge                 |
+| 7    | 3   | Pain/Itching                      |
+| 7    | 99  | Other                             |
+| 8    | 0   | Hearing Loss                      |
+| 8    | 1   | Sinus Pressure                    |
+| 8    | 3   | Tooth Pain                        |
+| 8    | 4   | Difficulty Swallowing             |
+| 8    | 5   | Dry mouth/Sore Tongue             |
+| 8    | 6   | Sore Throat/Hoarseness            |
+| 8    | 7   | Nasal Drainage                    |
+| 8    | 8   | Pain                              |
+| 8    | 10  | Ringing                           |
+| 8    | 11  | Allergies                         |
+| 8    | 12  | Discharge                         |
+| 8    | 13  | Decreased Smell                   |
+| 8    | 99  | Other                             |
+| 9    | 0   | Nasal Discharge                   |
+| 9    | 1   | Sinus Pressure                    |
+| 9    | 2   | Allergies                         |
+| 9    | 3   | Decreased Smell                   |
+| 9    | 99  | Other                             |
+| 10   | 0   | Sore Throat/Hoarseness            |
+| 10   | 1   | Cold Sores                        |
+| 10   | 2   | Sore Tongue                       |
+| 10   | 3   | Tooth Pain                        |
+| 10   | 4   | Difficulty Swallowing             |
+| 10   | 5   | Dry mouth/Sore Tongue             |
+| 10   | 99  | Other                             |
+| 11   | 0   | Cold/Heat Intolerance             |
+| 11   | 2   | Excessive Thirst                  |
+| 11   | 3   | Excessive Hunger                  |
+| 11   | 4   | Generalized Weakness              |
+| 11   | 99  | Other                             |
+| 12   | 0   | Brittle Hair/Nails                |
+| 12   | 1   | Hair Loss                         |
+| 12   | 2   | Mole Changes                      |
+| 12   | 3   | Rash                              |
+| 12   | 4   | Skin Lesion                       |
+| 12   | 5   | Laceration                        |
+| 12   | 6   | Skin Discoloration                |
+| 12   | 99  | Other                             |
+| 13   | 0   | Abdominal Pain                    |
+| 13   | 1   | Blood in Stool                    |
+| 13   | 2   | Change in Stools                  |
+| 13   | 3   | Constipation/Diarrhea             |
+| 13   | 5   | Heartburn                         |
+| 13   | 6   | Loss of Appetite                  |
+| 13   | 7   | Nausea/Vomiting                   |
+| 13   | 9   | Loss of Bowel Control             |
+| 13   | 99  | Other                             |
+| 14   | 0   | Back Pain                         |
+| 14   | 1   | Joint Pain                        |
+| 14   | 2   | Muscle Weakness/Cramps            |
+| 14   | 3   | Neck Pain                         |
+| 14   | 99  | Other                             |
+| 15   | 0   | Contact Allergy                   |
+| 15   | 1   | Food Allergies                    |
+| 15   | 2   | Seasonal Allergies/Hay Fever      |
+| 15   | 4   | Frequent Infections               |
+| 15   | 99  | Other                             |
+| 16   | 0   | Erectile Dysfunction              |
+| 16   | 1   | Penile Discharge                  |
+| 16   | 2   | Sexual Dysfunction                |
+| 16   | 99  | Other                             |
+| 17   | 0   | Abnormal Pap                      |
+| 17   | 1   | Irregular Menses                  |
+| 17   | 2   | Hot Flashes                       |
+| 17   | 3   | Vaginal Discharge                 |
+| 17   | 4   | Pain During Menstruation          |
+| 17   | 5   | Pain During Intercourse           |
+| 17   | 99  | Other                             |
+| 18   | 0   | Abnormal Pap                      |
+| 18   | 1   | Irregular Menses                  |
+| 18   | 2   | Hot Flashes                       |
+| 18   | 3   | Blood in Urine                    |
+| 18   | 4   | Urinary Incontinence/Dribbling    |
+| 18   | 5   | Slow Stream                       |
+| 18   | 6   | Erectile Dysfunction              |
+| 18   | 8   | Penile Discharge                  |
+| 18   | 9   | Painful/Burning Urination         |
+| 18   | 11  | Urinary Frequency                 |
+| 18   | 12  | Vaginal Discharge                 |
+| 18   | 13  | Pain During Menstruation          |
+| 18   | 14  | Pain During Intercourse           |
+| 18   | 99  | Other                             |
+| 20   | 1   | ALTERED MENTAL SENSORIUM          |
+| 20   | 2   | ABDOMINAL CRAMP/PAIN              |
+| 20   | 3   | ANOREXIA                          |
+| 20   | 4   | BLEEDING GUMS                     |
+| 20   | 5   | BODY WEAKNESS                     |
+| 20   | 6   | BLURRING OF VISION                |
+| 20   | 7   | CONSTIPATION                      |
+| 20   | 8   | CHEST PAIN/DISCOMFORT             |
+| 20   | 9   | COUGH                             |
+| 20   | 10  | DIARRHEA                          |
+| 20   | 11  | DIZZINESS                         |
+| 20   | 12  | DYSPHAGIA                         |
+| 20   | 13  | DYSPNEA                           |
+| 20   | 14  | DYSURIA                           |
+| 20   | 15  | EPISTAXIS                         |
+| 20   | 17  | FREQUENCY OF URINATION            |
+| 20   | 18  | HEADACHE                          |
+| 20   | 19  | HEMATEMESIS                       |
+| 20   | 20  | HEMATURIA                         |
+| 20   | 21  | HEMOPTYSIS                        |
+| 20   | 22  | IRRITABILITY                      |
+| 20   | 23  | JAUNDICE                          |
+| 20   | 25  | LOWER EXTREMITY EDEMA             |
+| 20   | 26  | MYALGIA                           |
+| 20   | 27  | ORTHOPNEA                         |
+| 20   | 28  | PALPITATIONS                      |
+| 20   | 29  | SKIN RASHES                       |
+| 20   | 30  | STOOL, BLOODY/BLACK TARRY/MUCOID  |
+| 20   | 32  | SWEATING                          |
+| 20   | 33  | SEIZURES                          |
+| 20   | 34  | URGENCY                           |
+| 20   | 35  | VOMITING/NAUSEA                   |
+| 20   | 36  | WEIGHT LOSS                       |
+| 20   | 37  | FEVER                             |
+| 20   | 38  | PAIN                              |
+| 20   | 99  | Others                            |
+
+```sql
+SELECT `review_of_system_types_id` as `type`, `type_key` as `key`, `label`
+FROM `review_of_systems` WHERE (`language` = 'en') AND (`status` = '1')
+ORDER BY review_of_system_types_id, type_key
+```
+
+### Review of Systems Types
+
+| type | review_of_system_type        |
+| ---- | ---------------------------- |
+| 1    | Constitutional Symptoms      |
+| 2    | Respiratory                  |
+| 3    | Psychiatric                  |
+| 4    | Cardiovascular               |
+| 5    | Neurological                 |
+| 6    | Hematologic/Lymphatic        |
+| 7    | Eyes                         |
+| 8    | Ears, Nose, Mouth and Throat |
+| 11   | Endocrine                    |
+| 12   | Integumentary/Breast         |
+| 13   | Gastrointestinal             |
+| 14   | Musculoskeletal              |
+| 15   | Allergic/Immunologic         |
+| 18   | Genitourinary                |
+| 19   | Other                        |
+| 20   | Sign and Symptoms            |
+
+```sql
+SELECT 
+`type_key` as `type`, `review_of_system_type`
+FROM `review_of_system_types` WHERE (`language` = 'en') AND (`active` = '1')
+ORDER BY `type`
 ```
 
 ## For Billing
