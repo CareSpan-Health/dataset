@@ -56,7 +56,7 @@ ORDER by `key`
 | 6   | Choose not to disclose          |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 34
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -138,7 +138,7 @@ ORDER BY `key`
 | 50  | Choose not to disclose  |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 36
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -255,7 +255,7 @@ ORDER BY `key`
 | 82  | United Church of Christ                |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 35
 SELECT 
   `type_key`  as `key`, `label` as `message`
@@ -282,7 +282,7 @@ ORDER by `key`
 | 11  | Uncle                |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 27
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -318,7 +318,7 @@ ORDER by `key`
 | 42  | Child Where Insured Has No Financial Responsibility |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 30
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -389,7 +389,7 @@ ORDER BY `key`
 | 10  | No Known Allergy |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 25
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -419,7 +419,7 @@ ORDER by `key`
 | 15  | Other                |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 68
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -438,7 +438,7 @@ ORDER by `key`
 | 4   | Life Threatening |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 88
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`
@@ -446,6 +446,185 @@ WHERE (`dictionary_types_id` = '88') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
+
+### Route
+
+| key | snomed    | message                 |
+| --- | --------- | ----------------------- |
+| 1   | 6064005   | Topical route           |
+| 2   | 10547007  | Auricular use           |
+| 3   | 12130007  | Intra-articular route   |
+| 4   | 16857009  | Vaginal use             |
+| 5   | 26643006  | Oral use                |
+| 6   | 34206005  | SC use                  |
+| 7   | 37161004  | Rectal use              |
+| 9   | 37839007  | Sublingual use          |
+| 11  | 45890007  | Transdermal use         |
+| 12  | 46713006  | Nasal use               |
+| 13  | 47625008  | Intravenous use         |
+| 14  | 54471007  | Buccal use              |
+| 15  | 54485002  | Ophthalmic use          |
+| 20  | 78421000  | Intramuscular use       |
+| 25  | 372449004 | Dental use              |
+| 26  | 372450004 | Endocervical use        |
+| 50  | 404818005 | Intratracheal route     |
+| 52  | 404820008 | Epidural route          |
+| 137 | 447694001 | Respiratory tract route |
+
+```sql
+-- Table: ref_codes
+-- dictionary_types_id: 88
+SELECT `id` as `key`, `snomed`, `description` as message
+FROM `ref_codes`
+WHERE `type` = 'route' and `status` = 1
+```
+
+### Medication Type
+
+| key | message      |
+| --- | ------------ |
+| 1   | Long Term    |
+| 2   | Supplements  |
+| 3   | OTC          |
+| 4   | Psychoactive |
+| 5   | Other        |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 65
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '65') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Medication Statuses
+
+#### For Self-Reporting
+
+| key | message          |
+| --- | ---------------- |
+| 1   | Active           |
+| 2   | Inactive         |
+| 3   | Discontinued     |
+| 4   | Deleted          |
+| 5   | Completed        |
+
+#### For Others, the following are added
+
+| key | message          |
+| --- | ---------------- |
+| 6   | Cancel Requested |
+| 7   | Cancel Pending   |
+| 8   | Canceled         |
+| 9   | Cancel Denied    |
+| 10  | Changed          |
+| 11  | Pending          |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 66
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '66') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Medication Discontinued Reasons
+
+| key | message           |
+| --- | ----------------- |
+| 1   | Doctor Suggested  |
+| 2   | Adverse Reactions |
+| 3   | Allergy           |
+| 4   | Can't Afford      |
+| 5   | Completed Course  |
+| 6   | Not Effective     |
+| 7   | Ran Out           |
+| 8   | Refused to Take   |
+| 9   | Side Effects      |
+| 10  | Wrong Dose        |
+| 11  | Other             |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 67
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '67') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Prescription Statuses
+
+| key | message          |
+| --- | ---------------- |
+| 1   | entered          |
+| 2   | printed          |
+| 3   | sending          |
+| 4   | erxsent          |
+| 5   | faxsent          |
+| 6   | error            |
+| 7   | deleted          |
+| 8   | requested        |
+| 9   | edited           |
+| 10  | epcserror        |
+| 11  | epcssigned       |
+| 12  | readytosign      |
+| 13  | pharmacyverified |
+
+:::warning
+
+Classification from **_DoseSpot_** (3rd Party)
+
+:::
+
+### Drug Classification
+
+| key | message              |
+| --- | -------------------- |
+|`miscellaneous antipsychotic agents`| - |
+|`psychotherapeutic combinations`| - |
+|`phenothiazine antipsychotics`| - |
+|`psychotherapeutic agents`| - |
+|`antipsychotics`| - |
+|`atypical antipsychotics`| - |
+|`Antipsychotic Agent Benzamide`| - |
+|`Antipsychotic Agent Benzisoxazole`| - |
+|`Antipsychotic Agent Benzothiazolylpiperazine`| - |
+|`Antipsychotic Agent Benzylisothiazolylpiperazine`| - |
+|`Antipsychotic Agent Butyrophenone`| - |
+|`Antipsychotic Agent Dibenzodiazepine`| - |
+|`Antipsychotic Agent Dibenzothiazepine`| - |
+|`Antipsychotic Agent Dibenzoxazepine`| - |
+|`Antipsychotic Agent Dihydroindoline`| - |
+|`Antipsychotic Agent Diphenylbutylperidine`| - |
+|`Antipsychotic Agent Phenothiazine Aliphatic`| - |
+|`Antipsychotic Agent Phenothiazine Piperazine`| - |
+|`Antipsychotic Agent Phenothiazine Piperidine`| - |
+|`Antipsychotic Agent Thienobenzodiazepine`| - |
+|`Antipsychotic Agent Thioxanthene Derivative`| - |
+|`Antipsychotic Agent`| - |
+|`Benzisoxazole (Antipsychotic)`| - |
+|`Butyrophenone Derivative (Antipsychotic)`| - |
+|`Dibenzodiazepine (Antipsychotic)`| - |
+|`Dibenzoxazepine (Antipsychotic)`| - |
+|`Dihydroindoline (Antipsychotic)`| - |
+|`Psychostimulant`| - |
+|`Antipsychotic Agent Quinolinone`| - |
+|`Second Generation (Atypical) Antipsychotic`| - |
+|`First Generation (Typical) Antipsychotic`| - |
+|`Antipsychotic Agent Typical Phenothiazine`| - |
+|`Antipsychotic Agent Typical Phenothiazine Piperidine`| - |
+
+:::warning
+
+Classification from **_DoseSpot_** (3rd Party)
+
+:::
 
 ## For Review of Systems
 
@@ -729,7 +908,7 @@ ORDER BY `key`
 | 13  | Billed to DPC        |
 
 ```sql
--- Table: dictionaries
+-- Table: ref_dictionaries
 -- dictionary_types_id: 93
 SELECT `type_key`  as `key`, `label` as `message`
 FROM `ref_dictionaries`

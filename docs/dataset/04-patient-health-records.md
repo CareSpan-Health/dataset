@@ -204,34 +204,56 @@ Using a `JSON` structure to accomodate multiple options
 
 ### `006` Medications: `object`
 
-| Name                            | Field                 | Description |
-|----------------------------------|---------------------|-------------|
-| Medication                       | medication          | The name of the medication |
-| Amount                           | amount              | Not Used - merged into size |
-| Complete                         | complete            | 'active', 'discontinued', 'deleted', 'completed', 'canceled', 'unknown'|
-| Detail                           | detail              |             |
-| Prescribing Doctor ID            | doctorid            | Prescribing doctor id |
-| Dosespot Medication Id           | dosespotmedid       | (3rd Party - DoseSpot - US) |
-| Drug Classification              | drugclassification  | (3rd Party - DoseSpot - `miscellaneous antipsychotic agents`, `psychotherapeutic combinations`, `phenothiazine antipsychotics`, `psychotherapeutic agents`, `antipsychotics`, `atypical antipsychotics`, `Antipsychotic Agent, Benzamide`, `Antipsychotic Agent, Benzisoxazole`, `Antipsychotic Agent, Benzothiazolylpiperazine`, `Antipsychotic Agent, Benzylisothiazolylpiperazine`, `Antipsychotic Agent, Butyrophenone`, `Antipsychotic Agent, Dibenzodiazepine`, `Antipsychotic Agent, Dibenzothiazepine`, `Antipsychotic Agent, Dibenzoxazepine`, `Antipsychotic Agent, Dihydroindoline`, `Antipsychotic Agent, Diphenylbutylperidine`, `Antipsychotic Agent, Phenothiazine, Aliphatic`, `Antipsychotic Agent, Phenothiazine, Piperazine`, `Antipsychotic Agent, Phenothiazine, Piperidine`, `Antipsychotic Agent, Thienobenzodiazepine`, `Antipsychotic Agent, Thioxanthene Derivative`, `Antipsychotic Agent`, `Benzisoxazole (Antipsychotic)`, `Butyrophenone Derivative (Antipsychotic)`, `Dibenzodiazepine (Antipsychotic)`, `Dibenzoxazepine (Antipsychotic)`, `Dihydroindoline (Antipsychotic)`, `Psychostimulant`, `Antipsychotic Agent, Quinolinone`, `Second Generation (Atypical) Antipsychotic`, `First Generation (Typical) Antipsychotic`, `Antipsychotic Agent, Typical, Phenothiazine`, `Antipsychotic Agent, Typical, Phenothiazine, Piperidine`)            |
-| End Date                         | edate               | Inactive Date|
-| Fhir CodingConcept               | fhir_code           | to store the coding structure (RxNorm) |
-| Generic                          | generic             | 0 or 1 |
-| GGPI reference                   | ggpireference       | (3rd Party - MIMS - PH) |
-| Measure                          | measure             | Not Used |
-| Medication Type                  | medicationtype      |             |
-| Medication Type - Other          | othermedicationtype |             |
-| Reasons Med Discontinued - Other | otherreason         |             |
-| Quantity                         | qty                 | The quantity of dosage |
-| Reasons Med Discontinued         | reason              |             |
-| Refill                           | refill              | Number of refills |
-| Route Code                       | routecode           |             |
-| Route Name                       | route_name          |             |
-| Controlled Substance Schedule    | schedule            |             |
-| Start Date                       | sdate               | Effective Date of the medication |
-| Medication Sent                  | sent                | sent (status: 'printed', 'erxsent', 'faxsent', 'pharmacyverified') to pharmacy |
-| SIG                              | sig                 |             |
-| Size                             | size                | e.g. 20 mg-400 mg |
-| Status (e.g. Printed, eRxSent)   | status              |'printed', 'erxsent', 'faxsent', 'deleted' 'pharmacyverified'|
+| id  | Name                             | Type      | Field                   | Description |
+| --- | -------------------------------- | --------- | ----------------------- | ----------- |
+| 1   | Medication                       | Text      | medication              | The name of the medication |
+| 2   | Start Date                       | Date      | sdate                   | Effective Date |
+| 3   | End Date                         | Date      | edate                   | Inactive Date|
+| 616 | Written Date                     | Date      | odate                   | Entered/Written Date |
+| 81  | Size                             | Text      | size                    | e.g. 20 mg-400 mg |
+| 84  | Refill                           | Integer   | refill                  | Number of refills |
+| 85  | Generic                          | Text      | generic                 | `1` for Generic allowed<br/>`0` for otherwise |
+| 86  | Quantity                         | Integer   | qty                     | The quantity of dosage |
+| 87  | SIG                              | Text Area | sig                     | Patient Directions |
+| 278 | Status (e.g. Printed, eRxSent)   | Code      | status                  | Check `Prescription Statuses` dictionary [link](/docs/dictionary#prescription-statuses) |
+| 148 | Complete (e.g. Active, Deleted)  | Text      | complete                | Check `Medication Statuses` dictionary [link](/docs/dictionary#medication-statuses) |
+| 95  | Medication Sent                  | Integer   | sent                    | `1` for sent (if the `status` is: `printed`, `erxsent`, `faxsent`, or `pharmacyverified`) |
+| 147 | Prescribing Doctor ID            | Integer   | doctorid                | Prescribing user ID |
+| 155 | Dosespot Medication Id           | Integer   | dosespotmedid           | (3rd Party - DoseSpot - US) |
+| 277 | Fhir CodingConcept               | Json      | fhir_code               | to store the coding structure (RxNorm) |
+| 451 | Medication Type                  | Integer   | medicationtype          |Check `Medication Type` dictionary [link](/docs/dictionary#medication-type)|
+| 457 | Medication Type - Other          | Text      | othermedicationtype     |             |
+| 452 | Detail                           | Text      | detail                  |             |
+| 454 | Route Code                       | Code      | routecode               |Check `Route` dictionary [link](/docs/dictionary#route)|
+| 453 | Route Name                       | Text      | route_name              |The name of the `route` from `Dictionary` (based on `routecode`)|
+| 455 | Reasons Med Discontinued         | Integer   | reason                  |Check `Medication Discontinued Reasons` dictionary [link](/docs/dictionary#medication-discontinued-reasons)|
+| 279 | Controlled Substance Schedule    | Integer   | schedule                |State Schedule|
+| 456 | Reasons Med Discontinued - Other | Text      | otherreason             |             |
+| 605 | Drug Classification              | Text      | drugclassification      |Check `Drug Classification` dictionary [link](/docs/dictionary#drug-classification)|
+| 608 | DoseSpot Pharmacy ID             | Integer   | dosespotpharmid         | Where is the prescription sent to?|
+
+#### For localization
+
+##### Asia
+
+| id  | Name                             | Type      | Field                   | Description |
+| --- | -------------------------------- | --------- | ----------------------- | ----------- |
+| 607 | MIMS Object                      | Text      | mimsobject              |             |
+| 609 | MIMS reference                   | Text      | mimsreference           |             |
+| 654 | philhealth_drugcode              | Text      | philhealth_drugcode     |             |
+| 655 | philhealth_gencode               | Text      | philhealth_gencode      |             |
+| 656 | philhealth_saltcode              | Text      | philhealth_saltcode     |             |
+| 657 | philhealth_formcode              | Text      | philhealth_formcode     |             |
+| 658 | philhealth_strengthcode          | Text      | philhealth_strengthcode |             |
+| 659 | philhealth_unitcode              | Text      | philhealth_unitcode     |             |
+| 660 | philhealth_packagecode           | Text      | philhealth_packagecode  |             |
+| 663 | philhealth_drugcode              | Text      | philhealth_drugcode     |             |
+| 664 | philhealth_gencode               | Text      | philhealth_gencode      |             |
+| 665 | philhealth_saltcode              | Text      | philhealth_saltcode     |             |
+| 666 | philhealth_formcode              | Text      | philhealth_formcode     |             |
+| 667 | philhealth_strengthcode          | Text      | philhealth_strengthcode |             |
+| 668 | philhealth_unitcode              | Text      | philhealth_unitcode     |             |
+| 669 | philhealth_packagecode           | Text      | philhealth_packagecode  |             |
 
 ### `007` Medical Problems: `object`
 
@@ -283,7 +305,7 @@ Using a `JSON` structure to accomodate multiple options
 | Lab Key | orderkey | CareSpan order only - This is the pointer to the actual test (e.g. CBC) |
 | Lab Value | orderval | The actual name of the test (e.g. CBC) |
 
-### __SQL Query used__
+### **SQL Query used**
 
 ```sql
 SELECT 
