@@ -1457,6 +1457,101 @@ SELECT `id` as `key`, `source`
 FROM `records_alt_source`;
 ```
 
+## For Media Files
+
+### Image Category
+
+| key | message |
+| --- | ------- |
+| 0   | Photo   |
+| 1   | Xray    |
+| 2   | MRI     |
+| 3   | CT Scan |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 18
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '18') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Tracing Category
+
+| key | message    |
+| --- | ---------- |
+| 0   | ECGs       |
+| 1   | Spirometry |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 22
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '22') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Audio Category
+
+| key | message |
+| --- | ------- |
+| 0   | Heart   |
+| 1   | Lung    |
+| 2   | Bowel   |
+| 3   | Other   |
+| 4   | Speech  |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 19
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '19') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Document Category
+
+| key | message                  |
+| --- | ------------------------ |
+| 0   | Labs                     |
+| 1   | Imaging                  |
+| 2   | OT/PT                    |
+| 3   | Speech                   |
+| 4   | Behavioral/Psych         |
+| 5   | Medical                  |
+| 6   | Other Documents          |
+| 7   | Authorizations           |
+| 8   | Other Consultations      |
+| 9   | Legal                    |
+| 10  | Medical Records          |
+| 11  | Information              |
+| 12  | Manuals                  |
+| 13  | Audiology                |
+| 14  | Ophthalmology            |
+| 15  | Other Labs               |
+| 16  | Surgical                 |
+| 17  | CCDA                     |
+| 18  | Signed Encounter Summary |
+| 19  | --                       |
+| 20  | Dermatology              |
+| 21  | Pain Management          |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 17
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '17') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
 ## For Billing
 
 ### Transaction Type

@@ -24,6 +24,20 @@ The CareSpan format will be generated in `JSON` format with the following fields
 | By Patient?                      | Number   | is_patient  | Whether entered by patient<br/>`1` for yes<br/>  `0` for no                                                                 |
 | Fields                           | Fields[] | fields      | See below for the fields object                                                                                             |
 
+**_SQL used for pulling the category fields below_**
+
+```sql
+SELECT 
+    f.`field`as `Name`,
+    fd.label as `Type`,
+    f.`var` as 'Field',
+    '' as 'Description'
+FROM `fields` f, `field_datatypes` fd
+WHERE 1
+AND f.`categories_id` LIKE '1'
+AND f.`field_datatypes_id` = fd.id
+```
+
 ### `001` Vital/Diagnostic Data: `object`
 
 #### Blood Pressue
@@ -301,6 +315,68 @@ For example, a patient maybe have a "fever" thread to treat the "fever" over 5 c
 | Immunization Key   | Integer | data_key  |             |
 | Fhir CodingConcept | Json    | fhir_code |             |
 
+## CareSpan Format V1 - For Media
+
+### `010` Image Archive: `object`
+
+| Name                   | Type      | Field        | Description                                                               |
+| ---------------------- | --------- | ------------ | ------------------------------------------------------------------------- |
+| Image Date             | Date      | idate        | Date of the File                                                          |
+| Name                   | Text      | name         | Name of the Image File                                                    |
+| Image File             | Image     | imageidx     | ID to the actual file                                                     |
+| File Name              | Text      | imgname      | Unique file name saved on the system, e.g. `C5F63EB856E149E6A878.jpg`     |
+| MIME Type (Media Type) | Text      | imgtype      | MIME type (Media type) of the file, e.g. `image/jpeg`                     |
+| Category               | Text      | display_type | Check `Image Category` dictionary [link](/docs/dictionary#image-category) |
+| Image Description      | Text Area | descr        |                                                                           |
+
+### `011` Tracings Archive: `object`
+
+| Name                   | Type           | Field        | Description                                                                                        |
+| ---------------------- | -------------- | ------------ | -------------------------------------------------------------------------------------------------- |
+| Tracing Date           | Date           | tdate        | Date of the File                                                                                   |
+| Name                   | Text           | name         | Name of the Tracing File                                                                           |
+| Tracing File           | Tracing        | tracingidx   | ID to the actual file                                                                              |
+| Tracing Encoding       | Text           | encoding     | if `spirometry`, there are the following encoding formats<br/>* `spirotel`<br/>* `spirobank-smart` |
+| File Name              | Text           | trcname      | Unique file name saved on the system, e.g. `6B2CA75C823140828598.dcm`                              |
+| MIME Type (Media Type) | Text           | trctype      | MIME type (Media type) of the file, e.g. `application/dicom`                                       |
+| Category               | Text           | display_type | Check `Tracing Category` dictionary [link](/docs/dictionary#tracing-category)                      |
+| Tracing Description    | Text Area      | descr        |                                                                                                    |
+| Record Pointer         | Record Pointer | rid          | Point to other Records                                                                             |
+
+#### Dropped Fields (Tracings Archive)
+
+| Name               | Type    | Field | Description |
+| ------------------ | ------- | ----- | ----------- |
+| Tracing Heart Rate | Integer | hr    |             |
+| Tracing R-R        | Integer | rr    |             |
+| Tracing Data       | Text    | tdata |             |
+
+### `013` Sounds Archive: `object`
+
+| Name                   | Type      | Field        | Description                                                               |
+| ---------------------- | --------- | ------------ | ------------------------------------------------------------------------- |
+| Audio Date             | Date      | adate        | Date of the File                                                          |
+| Name                   | Text      | name         | Name of the Audio File                                                    |
+| Audio File             | Audio     | audioidx     | ID to the actual file                                                     |
+| File Name              | Text      | audname      | Unique file name saved on the system, e.g. `EE1FF4AF6D344C51A915.wav`     |
+| MIME Type (Media Type) | Text      | audtype      | MIME type (Media type) of the file, e.g. `audio/wav`                      |
+| Category               | Text      | display_type | Check `Audio Category` dictionary [link](/docs/dictionary#audio-category) |
+| Sounds Description     | Text Area | descr        |                                                                           |
+
+### `015` Documents Archive: `object`
+
+| Name                   | Type           | Field        | Description                                                                                                  |
+| ---------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
+| Name                   | Text           | name         | Name of the Document File, e.g. `John's Lab Result`                                                          |
+| Document Date          | Date           | ddate        | Date of the File                                                                                             |
+| Document File          | Document       | documentidx  | ID to the actual file                                                                                        |
+| File Name              | Text           | docname      | Unique file name saved on the system, e.g. `2203FB37F2EB49CC97BD.pdf`                                        |
+| MIME Type (Media Type) | Text           | doctype      | MIME type (Media type) of the file, e.g. `application/pdf`                                                   |
+| Category               | Text           | display_type | Check `Document Category` dictionary [link](/docs/dictionary#document-category)                              |
+| Document Type          | Text           | dtype        | e.g. `document`                                                                                              |
+| Document Description   | Text Area      | descr        |                                                                                                              |
+| Record Pointer         | Record Pointer | rid          | Point to other Records, e.g.<br/>* `009` Lab Results (PDF, HTML) <br/>* `018` Lab Order (Requisition in PDF) |
+
 ## CareSpan Format V1 - For Orders
 
 ### `018` Documents Archive: `object`
@@ -428,20 +504,6 @@ This will have a parent pointer to
 | Procedure and Results | Text     | results            |             |
 | Document ID           | Document | docidx             |             |
 | Diagnostic Service    | Integer  | diagnostic_service |             |
-
-### **SQL Query used**
-
-```sql
-SELECT 
-    f.`field`as `Name`,
-    fd.label as `Type`,
-    f.`var` as 'Field',
-    '' as 'Description'
-FROM `fields` f, `field_datatypes` fd
-WHERE 1
-AND f.`categories_id` LIKE '1'
-AND f.`field_datatypes_id` = fd.id
-```
 
 ## HL7
 
