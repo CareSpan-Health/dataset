@@ -877,6 +877,333 @@ AND `label` <> ''
 ORDER by `key`
 ```
 
+## For Orders
+
+### Lab Order Types
+
+| key | message                          |
+| --- | -------------------------------- |
+| 1   | Organ or Disease Panels          |
+| 2   | Hematology                       |
+| 3   | Alphabetical / Combination Tests |
+| 4   | Microbiology                     |
+
+```sql
+-- Table: ref_order_types
+-- categories_id: 18
+SELECT `order_type_index` as `key`, `order_type` as `message`
+FROM `ref_order_types` WHERE `categories_id` = '18'
+AND `status` = 1
+```
+
+### Lab Order Tests
+
+| type_key | test_key | message                                       |
+| -------- | -------- | --------------------------------------------- |
+| 1        | 0        | Acute Hepatitis Panel                         |
+| 1        | 1        | Basic Metabolic Panel (8)                     |
+| 1        | 2        | Comp Metabolic Panel (14)                     |
+| 1        | 3        | Electrolyte Panel                             |
+| 1        | 4        | Hepatic Function Panel (7)                    |
+| 1        | 5        | Lipid Panel                                   |
+| 1        | 6        | Lipid Panel w/LDL/HDL Ratio                   |
+| 1        | 7        | Lipid Panel w/TC-HDL Ratio                    |
+| 1        | 8        | Lipid Panel w/Non-HDL Cholesterol             |
+| 1        | 9        | Lipid Cascade                                 |
+| 1        | 10       | Lipid Cascade with Rfx to ApoB                |
+| 1        | 11       | Renal Function Panel                          |
+| 1        | 12       | Other                                         |
+| 2        | 0        | CBC w Diff & Pit                              |
+| 2        | 1        | CBC wo Diff w Pit                             |
+| 2        | 2        | Hematocrit                                    |
+| 2        | 3        | Hemoglobin                                    |
+| 2        | 4        | Platelet Count                                |
+| 2        | 5        | RBC Count                                     |
+| 2        | 6        | WBC Count                                     |
+| 2        | 7        | Differential/Total WBC Count                  |
+| 2        | 8        | Other                                         |
+| 3        | 0        | ABO and Rh                                    |
+| 3        | 1        | Albumin                                       |
+| 3        | 2        | Alkaline Phosphatase                          |
+| 3        | 3        | ALT (SGPT)                                    |
+| 3        | 4        | Amylase                                       |
+| 3        | 5        | Antinuclear Antibodies                        |
+| 3        | 6        | AST (SGOT)                                    |
+| 3        | 7        | B12 and Folate                                |
+| 3        | 8        | Bilirubin, Total                              |
+| 3        | 9        | BUN                                           |
+| 3        | 10       | Calcium                                       |
+| 3        | 11       | C-Reactive Protein (CRP), Quant               |
+| 3        | 12       | hsCardiac C-Reactive Protein (CRP)            |
+| 3        | 13       | Carbamazepine (Tegretol)                      |
+| 3        | 14       | CEA                                           |
+| 3        | 15       | Cholesterol, Total                            |
+| 3        | 16       | Creatinine                                    |
+| 3        | 17       | Digoxin (Lanoxin)                             |
+| 3        | 18       | Estradiol                                     |
+| 3        | 19       | Ferritin                                      |
+| 3        | 20       | FSD and LH                                    |
+| 3        | 21       | GGT                                           |
+| 3        | 22       | Glucose, Plasma                               |
+| 3        | 23       | Glucose, Serum                                |
+| 3        | 24       | hCG, Beta Subunit, Qual (Serum Pregnancy)     |
+| 3        | 25       | hCG, Beta Subunit, Quant                      |
+| 3        | 26       | HDL Cholesterol                               |
+| 3        | 27       | Hgb A1C                                       |
+| 3        | 28       | Hep A Antibody, lgM                           |
+| 3        | 29       | Hep B Surface Antibody                        |
+| 3        | 30       | Hep B Surface Antigen                         |
+| 3        | 31       | HCV Ab w/Rfx to Ab Verification               |
+| 3        | 32       | HIV - 1/0/2 Antibodies                        |
+| 3        | 33       | H pylori Urea Breath                          |
+| 3        | 34       | H pylori Stool Antigen                        |
+| 3        | 35       | Iron and IBC                                  |
+| 3        | 36       | LDH                                           |
+| 3        | 37       | Lithium (Eskalith)                            |
+| 3        | 38       | Magnesium                                     |
+| 3        | 39       | Mononucleosis Test, Qual                      |
+| 3        | 40       | NMR LipoProfile                               |
+| 3        | 41       | Phenobarbital (Luminal)                       |
+| 3        | 42       | Phenytoin (Dilantin)                          |
+| 3        | 43       | Phosphorus                                    |
+| 3        | 44       | Potassium                                     |
+| 3        | 45       | Prolactin                                     |
+| 3        | 46       | PSA                                           |
+| 3        | 47       | PSA, Free: Total Ratio                        |
+| 3        | 48       | Prothrombin time (PT)/INR                     |
+| 3        | 49       | PT and PTT Activated                          |
+| 3        | 50       | PTT Activated                                 |
+| 3        | 51       | Rheumatoid Arthritis Factor                   |
+| 3        | 52       | RPR                                           |
+| 3        | 53       | Rubella Antibodies, IgG                       |
+| 3        | 54       | Sed Rate, Westergren                          |
+| 3        | 55       | Sodium                                        |
+| 3        | 56       | Testosterone, Total                           |
+| 3        | 57       | Testosterone, Women/Children                  |
+| 3        | 58       | Theophylline                                  |
+| 3        | 59       | Thyroid Cascade Profile                       |
+| 3        | 60       | Thyroxine (T4)                                |
+| 3        | 61       | Thyroxine (T4) Free                           |
+| 3        | 62       | T.pallidum Screening Cascade                  |
+| 3        | 63       | Triglycerides                                 |
+| 3        | 64       | Triiodothyronine (T3)                         |
+| 3        | 65       | T3Uptake                                      |
+| 3        | 66       | TSH, 3rd generation                           |
+| 3        | 67       | Uric Acid                                     |
+| 3        | 68       | Urinalysis                                    |
+| 3        | 69       | Vitamin D, 25-Hydroxy                         |
+| 3        | 70       | Lyme                                          |
+| 3        | 71       | Other                                         |
+| 3        | 73       | VDRL, Cerebrospinal Fluid                     |
+| 3        | 74       | HSV Type 1, IgG                               |
+| 3        | 75       | HSV Type 2, IgG                               |
+| 4        | 0        | Aerobic Bacterial Culture                     |
+| 4        | 1        | Fungus Culture                                |
+| 4        | 2        | Genital Culture, Routine                      |
+| 4        | 3        | Gram Stain                                    |
+| 4        | 4        | Grp B Strep Detect, NAA                       |
+| 4        | 5        | Grp B Strep Detect, NAA Rfx to suscept        |
+| 4        | 6        | Lower Respiratory Culture                     |
+| 4        | 7        | Occult Blood, Fecal, iA                       |
+| 4        | 8        | Ova and Parasites                             |
+| 4        | 9        | Stool Culture                                 |
+| 4        | 10       | Throat Beta-Hemolytic Strep Cult, Group A     |
+| 4        | 11       | Upper Respiratory Culture, Routine            |
+| 4        | 12       | Urine Culture, Routine                        |
+| 4        | 13       | Other                                         |
+| 4        | 15       | Chlamydia Trachomatis Culture                 |
+| 4        | 18       | Chlamydia Trachomatis, NAA                    |
+| 4        | 16       | Neisseria Gonorrhoeae Culture Only            |
+| 4        | 19       | Neisseria Gonorrhoeae, NAA                    |
+| 4        | 17       | Herpes Simplex Virus (HSV) Culture and Typing |
+| 5        | 0        | NuSwab Vaginitis (VG)                         |
+| 5        | 1        | NuSwab Vaginitis Plus (VG+)                   |
+| 5        | 2        | Bacterial Vaginosis, NAA                      |
+| 5        | 3        | C. albicans & C. glabrata, NAA                |
+| 5        | 4        | Candida Six-species Profile                   |
+| 5        | 5        | Chlamydia/Gonoccoccus, NAA                    |
+| 5        | 6        | Ct/Ng/Tv                                      |
+| 5        | 7        | Genital Mycoplasmas, Swab                     |
+| 5        | 8        | HSV 1 & 2, NAA                                |
+| 5        | 9        | Trichomonas vaginalis, NAA                    |
+| 5        | 10       | Other                                         |
+| 6        | 0        | Chronic Kidney Disease Report                 |
+| 6        | 1        | Cardiovascular Risk Assessment Report         |
+| 6        | 2        | Other                                         |
+
+```sql
+-- Table: order_tests
+-- categories_id: 18
+
+SELECT 
+-- test.`order_test_index`, 
+test.`order_type_index` as `type_key`, test.`order_test_key` as `test_key`, test.`label` as `message`
+-- test.`parent_table`, test.`parent_id` as `parent_test_key`
+FROM `order_tests` test, `ref_order_types` t
+WHERE (test.`language` = 'en') AND (test.`status` = '1')
+AND t.`categories_id` = 18 AND test.`order_type_index` = t.`order_type_index`
+AND test.`parent_table` is null
+
+```
+
+### In House Tests
+
+:::note
+
+Subject to change as this is configurable
+
+:::
+
+| key | message                                                                                                       |
+| --- | ------------------------------------------------------------------------------------------------------------- |
+| 1   | Manual urinalysis using tablet reagent                                                                        |
+| 2   | Urine pregnancy test using visual color comparison method                                                     |
+| 3   | Qualitative analysis of occult blood in feces by peroxidase activity                                          |
+| 4   | Measurement of glucose in blood using reagent strip                                                           |
+| 6   | Intradermal tuberculosis skin test                                                                            |
+| 7   | Influenza virus detection by nucleic acid using multiplex reverse transcription and amplified probe technique |
+| 8   | Respiratory virus detection by nucleic acid using amplified probe technique                                   |
+| 9   | Group A Streptococcus detection by nucleic acid using amplified probe technique                               |
+| 10  | Influenza antigen detection by immunoassay with direct optical observation                                    |
+| 11  | Hgb A1C                                                                                                       |
+| 12  | Urine drug tests: Drug test(s), presumptive, any number of drug classes, qualitative                          |
+| 13  | Urinalysis macro (dipstick) panel                                                                             |
+| 14  | SARS-CoV-2 (COVID-19) Ag [Presence] in Respiratory specimen by Rapid immunoassay                              |
+| 15  | Drugs of abuse panel - Urine by Screen method                                                                 |
+
+```sql
+-- Table: ref_inhouse_labs
+
+SELECT 
+`inhouse_labs_id` as `key`, 
+-- `client_id`, `cptcode`, `code_type`, `loinc`, 
+`lab` as `message`
+-- , `can_enter_results`, `active`
+FROM `ref_inhouse_labs`
+WHERE `active` = 1
+```
+
+### Imaging Order Types
+
+| key | message          |
+| --- | ---------------- |
+| 7   | MRI              |
+| 8   | CT               |
+| 9   | X-Ray            |
+| 10  | Fluoroscopy      |
+| 11  | Ultrasound       |
+| 12  | Nuclear Medicine |
+| 13  | Breast Imaging   |
+| 14  | DEXA             |
+
+```sql
+-- Table: ref_order_types
+-- categories_id: 19
+SELECT `order_type_index` as `key`, `order_type` as `message`
+FROM `ref_order_types` WHERE `categories_id` = '19'
+AND `status` = 1
+```
+
+### Imaging Order Tests
+
+| type_key | test_key | message                                 |
+| -------- | -------- | --------------------------------------- |
+| 7        | 3        | Brain MRI                               |
+| 7        | 4        | Brain MRA                               |
+| 7        | 5        | Cervical Spine                          |
+| 7        | 6        | Thoracic Spine                          |
+| 7        | 7        | Lumbar Spine                            |
+| 7        | 8        | Knee                                    |
+| 7        | 11       | Shoulder                                |
+| 7        | 14       | Extremity Other                         |
+| 8        | 3        | Head CT                                 |
+| 8        | 4        | Sinus                                   |
+| 8        | 5        | Cervical Spine                          |
+| 8        | 6        | Thoracic Spine                          |
+| 8        | 7        | Lumbar spine                            |
+| 8        | 8        | CTA                                     |
+| 8        | 10       | Abdomen and Pelvis                      |
+| 8        | 11       | Abdomen                                 |
+| 8        | 12       | Pelvis                                  |
+| 8        | 13       | Renal Colic                             |
+| 8        | 14       | Urogram                                 |
+| 8        | 15       | Cardiac                                 |
+| 8        | 16       | With Calcium Score                      |
+| 8        | 17       | Extremity                               |
+| 8        | 19       | Other                                   |
+| 8        | 21       | Chest CT                                |
+| 9        | 0        | Chest (PA/Lateral)                      |
+| 9        | 1        | Chest (1 view)                          |
+| 9        | 2        | Acute abdomen (2 view abd + 1 view cxr) |
+| 9        | 3        | KUB                                     |
+| 9        | 4        | Cervical Spine                          |
+| 9        | 5        | Thoracic Spine                          |
+| 9        | 6        | Lumbar Spine                            |
+| 9        | 8        | Extremity/Joint                         |
+| 9        | 10       | Other                                   |
+| 10       | 0        | Esophagram                              |
+| 10       | 1        | Upper GI                                |
+| 10       | 2        | Small bowel follow-through              |
+| 10       | 3        | Video swallowing study                  |
+| 10       | 4        | Barium enema                            |
+| 10       | 6        | VCUG                                    |
+| 10       | 7        | Cervical Myelogram                      |
+| 10       | 8        | Thoracic Myelogram                      |
+| 10       | 9        | Lumbar Myelogram                        |
+| 10       | 10       | Lumbar puncture                         |
+| 10       | 16       | Other                                   |
+| 11       | 0        | Complete abdomen                        |
+| 11       | 1        | Limited abdomen                         |
+| 11       | 3        | Pelvis                                  |
+| 11       | 4        | OB                                      |
+| 11       | 5        | Renal                                   |
+| 11       | 6        | Scrotum                                 |
+| 11       | 7        | Thyroid                                 |
+| 11       | 8        | Thyroid FNA                             |
+| 11       | 9        | Carotid                                 |
+| 11       | 10       | AAA                                     |
+| 11       | 11       | Venous (DVT) Lower extremity            |
+| 11       | 15       | Venous (DVT) Upper extremity            |
+| 11       | 19       | Arterial                                |
+| 11       | 22       | Full Peripheral Lower extremity         |
+| 11       | 26       | Full Peripheral Upper extremity         |
+| 11       | 30       | Other                                   |
+| 12       | 0        | Whole body bone scan                    |
+| 12       | 3        | 3 phase bone scan                       |
+| 12       | 6        | Multiple areas bone scan                |
+| 12       | 9        | Thyroid uptake + scan                   |
+| 12       | 10       | MUGA                                    |
+| 12       | 11       | Gastric emptying                        |
+| 12       | 15       | HIDA                                    |
+| 12       | 17       | Renal scan                              |
+| 12       | 21       | Myocardial perfusion                    |
+| 12       | 24       | PET/CT                                  |
+| 12       | 26       | Other                                   |
+| 13       | 0        | Screening mammogram                     |
+| 13       | 1        | Breast ultrasound                       |
+| 13       | 2        | Diagnostic mammogram                    |
+| 13       | 3        | Breast MRI                              |
+| 13       | 4        | Other                                   |
+| 14       | 0        | Hip/lumbar                              |
+| 14       | 1        | Forearm/ankle                           |
+
+```sql
+-- Table: order_tests
+-- categories_id: 19
+
+SELECT 
+-- test.`order_test_index`, 
+test.`order_type_index` as `type_key`, test.`order_test_key` as `test_key`, test.`label` as `message`
+-- test.`parent_table`, test.`parent_id` as `parent_test_key`
+FROM `order_tests` test, `ref_order_types` t
+WHERE (test.`language` = 'en') AND (test.`status` = '1')
+AND t.`categories_id` = 19 AND test.`order_type_index` = t.`order_type_index`
+AND test.`parent_table` is null
+
+```
+
+
+
 ## For Review of Systems
 
 ### Review of Systems
@@ -1098,6 +1425,37 @@ ORDER BY `type`
 | key           | description                    | code | OID | uri |
 | ------------- | ------------------------------ | ---- | --- | --- |
 | `{{rxqdrug}}` | **DoseSpot** Generic Drug Code | -    | -   | -   |
+
+### For Vendor Product
+
+| key | source                            |
+| --- | --------------------------------- |
+| 1   | AllScripts Pro                    |
+| 2   | DoseSpot Staging                  |
+| 3   | AllScripts TouchWorks             |
+| 4   | Change Healthcare Labs            |
+| 5   | Point Click Care                  |
+| 6   | Athena Health                     |
+| 7   | eClinical Works CCDA              |
+| 8   | drchrono CCDA                     |
+| 9   | athenahealth CCDA                 |
+| 10  | Enable Healthcare Inc. (EHI) CCDA |
+| 11  | CCDA import                       |
+| 12  | Greenway CCDA                     |
+| 13  | Practice Fusion CCDA              |
+| 14  | MWell                             |
+| 15  | DHIT CCDA                         |
+| 16  | Adventus                          |
+| 17  | Medilink                          |
+| 18  | Medicard                          |
+| 19  | DHIT SSO                          |
+| 20  | MMMC                              |
+
+```sql
+SELECT `id` as `key`, `source`
+-- , `description`, `ehr_vendor`
+FROM `records_alt_source`;
+```
 
 ## For Billing
 
