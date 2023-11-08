@@ -315,6 +315,102 @@ For example, a patient maybe have a "fever" thread to treat the "fever" over 5 c
 | Immunization Key   | Integer | data_key  |             |
 | Fhir CodingConcept | Json    | fhir_code |             |
 
+### `014` Notes & Comments: `object`
+
+Used for multiple purposes
+
+#### General comments to any record
+
+| Name              | Type           | Field  | Description                   |
+| ----------------- | -------------- | ------ | ----------------------------- |
+| Date              | Date           | ddate  | When the comment was added?   |
+| General           | Text Area      | gnotes | The comment to the any record |
+| Record ID Pointer | Record Pointer | rid    | Point to other Records        |
+
+#### Encounter Notes
+
+##### Chief Complaint
+
+| Name      | Type      | Field     | Description                                |
+| --------- | --------- | --------- | ------------------------------------------ |
+| Date      | Date      | ddate     | When the note was added?                   |
+| Complaint | Text Area | complaint | Complaint (Reason for visit) the encounter |
+
+##### History of Present Illness
+
+| Name                       | Type      | Field | Description              |
+| -------------------------- | --------- | ----- | ------------------------ |
+| Date                       | Date      | ddate | When the note was added? |
+| History of Present Illness | Text Area | hpi   |                          |
+
+#### Clinician Notes
+
+| Name           | Type      | Field  | Description              |
+| -------------- | --------- | ------ | ------------------------ |
+| Date           | Date      | ddate  | When the note was added? |
+| Provider Notes | Text Area | pnotes |                          |
+
+#### Presenter Notes
+
+| Name            | Type      | Field  | Description              |
+| --------------- | --------- | ------ | ------------------------ |
+| Date            | Date      | ddate  | When the note was added? |
+| Presenter Notes | Text Area | tnotes |                          |
+
+#### Consultant Notes
+
+| Name             | Type      | Field  | Description              |
+| ---------------- | --------- | ------ | ------------------------ |
+| Date             | Date      | ddate  | When the note was added? |
+| Consultant Notes | Text Area | cnotes |                          |
+
+
+#### Findings
+
+| Name          | Type      | Field      | Description              |
+| ------------- | --------- | ---------- | ------------------------ |
+| Date          | Date      | ddate      | When the note was added? |
+| Physical Exam | Text Area | pobjective |                          |
+
+#### Overall Assessment
+
+| Name       | Type      | Field      | Description              |
+| ---------- | --------- | ---------- | ------------------------ |
+| Date       | Date      | ddate      | When the note was added? |
+| Assessment | Text Area | assessment |                          |
+
+#### Overall Plan
+
+| Name | Type      | Field | Description              |
+| ---- | --------- | ----- | ------------------------ |
+| Date | Date      | ddate | When the note was added? |
+| Plan | Text Area | plan  |                          |
+
+#### No Show Encounter
+
+| Name            | Type      | Field           | Description              |
+| --------------- | --------- | --------------- | ------------------------ |
+| Date            | Date      | ddate           | When the note was added? |
+| No Show Comment | Text Area | comment_no_show |                          |
+| noshow_types    | Text Area | noshow_types    |                          |
+
+#### Encounter Addendum
+
+| Name     | Type      | Field    | Description              |
+| -------- | --------- | -------- | ------------------------ |
+| Date     | Date      | ddate    | When the note was added? |
+| Addendum | Text Area | addendum |                          |
+
+#### Dropped Fields (Encounter Notes)
+
+| Name                       | Type      | Field       | Description |
+| -------------------------- | --------- | ----------- | ----------- |
+| Additional Provider Notes  | Text Area | anotes      |             |
+| Additional Presenter Notes | Text Area | nnotes      |             |
+| Chief Complaint            | Text Area | psubjective |             |
+| Private Note Flag          | Integer   | private     |             |
+| User ID                    | Integer   | uid         |             |
+
 ## CareSpan Format V1 - For Media
 
 ### `010` Image Archive: `object`
