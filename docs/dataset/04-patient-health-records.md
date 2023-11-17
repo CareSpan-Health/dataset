@@ -199,7 +199,7 @@ AND f.`field_datatypes_id` = fd.id
 | Medication Sent                  | Integer   | sent                | `1` for sent (if the `status` is: `printed`, `erxsent`, `faxsent`, or `pharmacyverified`)                   |
 | Prescribing Doctor ID            | Integer   | doctorid            | Prescribing user ID                                                                                         |
 | Dosespot Medication Id           | Integer   | dosespotmedid       | (3rd Party - DoseSpot - US)                                                                                 |
-| Fhir CodingConcept               | Json      | fhir_code           | See `fhir_code` [below](#fhir-codeableconcept)                                                                   |
+| Fhir CodingConcept               | Json      | fhir_code           | See `fhir_code` [below](#fhir-codeableconcept)                                                              |
 | Medication Type                  | Integer   | medicationtype      | Check `Medication Type` dictionary [link](/docs/dictionary#medication-type)                                 |
 | Medication Type - Other          | Text      | othermedicationtype |                                                                                                             |
 | Detail                           | Text      | detail              |                                                                                                             |
@@ -325,7 +325,7 @@ Used for multiple purposes
 | ----------------- | -------------- | ------ | ----------------------------- |
 | Date              | Date           | ddate  | When the comment was added?   |
 | General           | Text Area      | gnotes | The comment to the any record |
-| Record ID Pointer | Record Pointer | rid    | Point to other Records        |
+| Record ID Pointer | Record Pointer | rid    | Point to a Record             |
 
 #### Encounter Notes
 
@@ -435,25 +435,25 @@ Used for multiple purposes
 
 ### `027` Administered Medications: `object`
 
-| Name               | Type    | Field       | Description                                                      |
-| ------------------ | ------- | ----------- | ---------------------------------------------------------------- |
-| Medication         | Text    | medication  | The name of the medication                                       |
-| Start Date         | Date    | sdate       | Administered Date                                                |
-| Size               | Text    | size        | How much was administered                                        |
-| Status             | Code    | status      |`completed` \| `in-progress` \| `not-done` \| `on-hold` \| `entered-in-error` \| `stopped` \| `unknown` |
-| CPT Code           | Code    | cptcode     |                                                                  |
-| NDC                | Text    | ndc         |                                                                  |
-| Lot number         | Text    | lot         |                                                                  |
-| Quantity           | Integer | qty         |                                                                  |
-| Expiration Date    | Date    | expires_at  |                                                                  |
-| Doctor ID          | Integer | doctorid    |                                                                  |
-| Route Code         | Code    | routecode   | Check `Route` dictionary [link](/docs/dictionary#route)          |
-| Route Name         | Text    | route_name  | The name of the `route` from `Dictionary` (based on `routecode`) |
-| Site Code          | Code    | sitecode    |Check `Site` dictionary [link](/docs/dictionary#site)          |
-| Site Name          | Text    | site_name   | The name of the `site` from `Dictionary` (based on `sitecode`)                                     |
-| Fhir CodingConcept | Json    | fhir_code   | See `fhir_code` [below](#fhir-codeableconcept)             |
-| Provided By        | Code    | provided_by |                                                                  |
-| Client ID          | Integer | clientid    |                                                                  |
+| Name               | Type    | Field       | Description                                                                                             |
+| ------------------ | ------- | ----------- | ------------------------------------------------------------------------------------------------------- |
+| Medication         | Text    | medication  | The name of the medication                                                                              |
+| Start Date         | Date    | sdate       | Administered Date                                                                                       |
+| Size               | Text    | size        | How much was administered                                                                               |
+| Status             | Code    | status      | `completed` \| `in-progress` \| `not-done` \| `on-hold` \| `entered-in-error` \| `stopped` \| `unknown` |
+| CPT Code           | Code    | cptcode     |                                                                                                         |
+| NDC                | Text    | ndc         |                                                                                                         |
+| Lot number         | Text    | lot         |                                                                                                         |
+| Quantity           | Integer | qty         |                                                                                                         |
+| Expiration Date    | Date    | expires_at  |                                                                                                         |
+| Doctor ID          | Integer | doctorid    |                                                                                                         |
+| Route Code         | Code    | routecode   | Check `Route` dictionary [link](/docs/dictionary#route)                                                 |
+| Route Name         | Text    | route_name  | The name of the `route` from `Dictionary` (based on `routecode`)                                        |
+| Site Code          | Code    | sitecode    | Check `Site` dictionary [link](/docs/dictionary#site)                                                   |
+| Site Name          | Text    | site_name   | The name of the `site` from `Dictionary` (based on `sitecode`)                                          |
+| Fhir CodingConcept | Json    | fhir_code   | See `fhir_code` [below](#fhir-codeableconcept)                                                          |
+| Provided By        | Code    | provided_by |                                                                                                         |
+| Client ID          | Integer | clientid    |                                                                                                         |
 
 ## CareSpan Format V1 - For Managing Records
 
@@ -479,6 +479,15 @@ cleanRecords(records, recordsToBeFilteredOut); // remove the records
 
 // ...
 ```
+
+### `054` Review: `object`
+
+| Name              | Type           | Field      | Description                   |
+| ----------------- | -------------- | ---------- | ----------------------------- |
+| Reviewed Date     | Date           | rdate      | What the review was performed |
+| Record ID Pointer | Record Pointer | rid        | Point to a Record             |
+| Category ID       | Integer        | categoryid |                               |
+| Detail            | Text Area      | detail     | Detail of what was reviewed   |
 
 ## CareSpan Format V1 - For Media
 
@@ -506,7 +515,7 @@ cleanRecords(records, recordsToBeFilteredOut); // remove the records
 | MIME Type (Media Type) | Text           | trctype      | MIME type (Media type) of the file, e.g. `application/dicom`                                       |
 | Category               | Text           | display_type | Check `Tracing Category` dictionary [link](/docs/dictionary#tracing-category)                      |
 | Tracing Description    | Text Area      | descr        |                                                                                                    |
-| Record Pointer         | Record Pointer | rid          | Point to other Records                                                                             |
+| Record Pointer         | Record Pointer | rid          | Point to a Record                                                                                  |
 
 #### Dropped Fields (Tracings Archive)
 
@@ -530,17 +539,17 @@ cleanRecords(records, recordsToBeFilteredOut); // remove the records
 
 ### `015` Documents Archive: `object`
 
-| Name                   | Type           | Field        | Description                                                                                                  |
-| ---------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------ |
-| Name                   | Text           | name         | Name of the Document File, e.g. `John's Lab Result`                                                          |
-| Document Date          | Date           | ddate        | Date of the File                                                                                             |
-| Document File          | Document       | documentidx  | ID to the actual file                                                                                        |
-| File Name              | Text           | docname      | Unique file name saved on the system, e.g. `2203FB37F2EB49CC97BD.pdf`                                        |
-| MIME Type (Media Type) | Text           | doctype      | MIME type (Media type) of the file, e.g. `application/pdf`                                                   |
-| Category               | Text           | display_type | Check `Document Category` dictionary [link](/docs/dictionary#document-category)                              |
-| Document Type          | Text           | dtype        | e.g. `document`                                                                                              |
-| Document Description   | Text Area      | descr        |                                                                                                              |
-| Record Pointer         | Record Pointer | rid          | Point to other Records, e.g.<br/>* `009` Lab Results (PDF, HTML) <br/>* `018` Lab Order (Requisition in PDF) |
+| Name                   | Type           | Field        | Description                                                                                             |
+| ---------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| Name                   | Text           | name         | Name of the Document File, e.g. `John's Lab Result`                                                     |
+| Document Date          | Date           | ddate        | Date of the File                                                                                        |
+| Document File          | Document       | documentidx  | ID to the actual file                                                                                   |
+| File Name              | Text           | docname      | Unique file name saved on the system, e.g. `2203FB37F2EB49CC97BD.pdf`                                   |
+| MIME Type (Media Type) | Text           | doctype      | MIME type (Media type) of the file, e.g. `application/pdf`                                              |
+| Category               | Text           | display_type | Check `Document Category` dictionary [link](/docs/dictionary#document-category)                         |
+| Document Type          | Text           | dtype        | e.g. `document`                                                                                         |
+| Document Description   | Text Area      | descr        |                                                                                                         |
+| Record Pointer         | Record Pointer | rid          | Point to a Record, e.g.<br/>* `009` Lab Results (PDF, HTML) <br/>* `018` Lab Order (Requisition in PDF) |
 
 ## CareSpan Format V1 - For Orders
 
