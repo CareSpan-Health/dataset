@@ -388,11 +388,11 @@ Used for multiple purposes
 
 #### No Show Encounter
 
-| Name            | Type      | Field           | Description              |
-| --------------- | --------- | --------------- | ------------------------ |
-| Date            | Date      | ddate           | When the note was added? |
-| No Show Comment | Text Area | comment_no_show |                          |
-| noshow_types    | Text Area | noshow_types    |                          |
+| Name            | Type      | Field           | Description                                                             |
+| --------------- | --------- | --------------- | ----------------------------------------------------------------------- |
+| Date            | Date      | ddate           | When the note was added?                                                |
+| No Show Comment | Text Area | comment_no_show |                                                                         |
+| noshow_types    | Text Area | noshow_types    | Check `No Show Types` dictionary [link](/docs/dictionary#no-show-types) |
 
 #### Encounter Addendum
 
@@ -410,6 +410,31 @@ Used for multiple purposes
 | Chief Complaint            | Text Area | psubjective |             |
 | Private Note Flag          | Integer   | private     |             |
 | User ID                    | Integer   | uid         |             |
+
+## CareSpan Format V1 - For Deleting
+
+### `016` Deleted Records: `object`
+
+When records are deleted, they are "softly" removed. Meaning, we flag them as deleted but still kept on the system for record keeping, audit, and legal purposes
+
+| Name              | Type           | Field  | Description                            |
+| ----------------- | -------------- | ------ | -------------------------------------- |
+| Record ID Pointer | Record Pointer | rid    | Point to a record to be "soft" deleted |
+| Reason            | Text Area      | reason | Reason for deleting                    |
+
+The `rid` will point to the record that needs to be deleted. When pulling rom the database, we need to exclude these records (and their children).
+
+```javascript
+// psuedo code for showing the logic
+
+const records = getAllRecords();
+
+const recordsToBeFilteredOut = getDeletedRecords(); // need to remember to include the children
+
+cleanRecords(records, recordsToBeFilteredOut); // remove the records
+
+// ...
+```
 
 ## CareSpan Format V1 - For Media
 

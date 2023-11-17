@@ -1620,3 +1620,32 @@ WHERE (`dictionary_types_id` = '93') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
+
+
+### No Show Types
+
+| key | message                                                   |
+| --- | --------------------------------------------------------- |
+| 0   | Patient not in Consult Room                               |
+| 1   | Audio Problems (Video is OK)                              |
+| 2   | Video Problems (Audio is OK)                              |
+| 3   | No Audio and Video                                        |
+| 4   | Connectivity issues (Doctor has poor internet connection) |
+| 5   | Re-decked to attending physician                          |
+| 6   | For rescheduling                                          |
+| 7   | Triaged to Specialist                                     |
+| 8   | Triaged to ER/F2F                                         |
+| 9   | Doctor did not hear/see the notification                  |
+| 10  | Doctor not on duty                                        |
+| 11  | Others, specify:                                          |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 94
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '94') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
