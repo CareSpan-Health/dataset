@@ -473,10 +473,36 @@ ORDER by `key`
 
 ```sql
 -- Table: ref_codes
--- dictionary_types_id: 88
+-- type: route
 SELECT `id` as `key`, `snomed`, `description` as message
 FROM `ref_codes`
 WHERE `type` = 'route' and `status` = 1
+```
+
+### Site
+
+| key | snomed            | message                           |
+| --- | ----------------- | --------------------------------- |
+| 151 | 368209003         | Right upper arm structure         |
+| 152 | 368208006         | Left upper arm structure          |
+| 153 | 86367003          | Left upper quadrant of abdomen    |
+| 154 | 50519007          | Right upper quadrant of abdomen   |
+| 155 | 68505006          | Left lower quadrant of abdomen    |
+| 156 | 48544008          | Right lower quadrant of abdomen   |
+| 157 | 456271000124109   | Ventrogluteal region              |
+| 158 | 72226001          | Rectus femoris structure          |
+| 159 | 181681008         | Entire vastus lateralis muscle    |
+| 160 | 16217701000119102 | Structure of left deltoid muscle  |
+| 161 | 16217661000119109 | Structure of right deltoid muscle |
+| 162 | 209570001         | Entire right thigh                |
+| 163 | 209672000         | Entire left thigh                 |
+
+```sql
+-- Table: ref_codes
+-- type: site
+SELECT `id` as `key`, `snomed`, `description` as message
+FROM `ref_codes`
+WHERE `type` = 'site' and `status` = 1
 ```
 
 ### Medication Type
@@ -1280,7 +1306,6 @@ ORDER by `key`
 
 ### Assessment Answer Statuses
 
-
 | key | message            |
 | --- | ------------------ |
 | 1   | Unknown            |
@@ -1296,7 +1321,6 @@ WHERE (`dictionary_types_id` = '81') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
-
 
 ## For Review of Systems
 
@@ -1741,4 +1765,3 @@ WHERE (`dictionary_types_id` = '94') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
-

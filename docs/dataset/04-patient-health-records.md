@@ -199,7 +199,7 @@ AND f.`field_datatypes_id` = fd.id
 | Medication Sent                  | Integer   | sent                | `1` for sent (if the `status` is: `printed`, `erxsent`, `faxsent`, or `pharmacyverified`)                   |
 | Prescribing Doctor ID            | Integer   | doctorid            | Prescribing user ID                                                                                         |
 | Dosespot Medication Id           | Integer   | dosespotmedid       | (3rd Party - DoseSpot - US)                                                                                 |
-| Fhir CodingConcept               | Json      | fhir_code           | See `fhir_code` [below](#codeableconcept)                                                                   |
+| Fhir CodingConcept               | Json      | fhir_code           | See `fhir_code` [below](#fhir-codeableconcept)                                                                   |
 | Medication Type                  | Integer   | medicationtype      | Check `Medication Type` dictionary [link](/docs/dictionary#medication-type)                                 |
 | Medication Type - Other          | Text      | othermedicationtype |                                                                                                             |
 | Detail                           | Text      | detail              |                                                                                                             |
@@ -418,7 +418,7 @@ Used for multiple purposes
 | Assessment Type                 | Text    | assessmenttype | Check `Assessment Type` dictionary [link](/docs/dictionary#assessment-type)                            |
 | Category (evaluation, template) | Text    | category       | `evaluation`: evaluation in Health Record <br/>`template`: exam templates in the encounter (exam room) |
 | Assessment Reason               | Text    | reason         |                                                                                                        |
-| Prescribing Doctor ID           | Integer | doctorid       | Prescribing user ID - ` ` (empty string) if none                                                                                   |
+| Prescribing Doctor ID           | Integer | doctorid       | Prescribing user ID - ` ` (empty string) if none                                                       |
 | Assessment Report               | Tracing | reportidx      | ID to the actual file                                                                                  |
 | Assessment Answer Set           | Json    | answerset      | What the patient has entered                                                                           |
 | Assessment Result Data          | Json    | json           | Once submitted, the final result is created based on answer set                                        |
@@ -433,6 +433,27 @@ Used for multiple purposes
 | Assessment Ordered | Date           | odate |             |
 | Assessment Date    | Date           | adate |             |
 
+### `027` Administered Medications: `object`
+
+| Name               | Type    | Field       | Description                                                      |
+| ------------------ | ------- | ----------- | ---------------------------------------------------------------- |
+| Medication         | Text    | medication  | The name of the medication                                       |
+| Start Date         | Date    | sdate       | Administered Date                                                |
+| Size               | Text    | size        | How much was administered                                        |
+| Status             | Code    | status      |`completed` \| `in-progress` \| `not-done` \| `on-hold` \| `entered-in-error` \| `stopped` \| `unknown` |
+| CPT Code           | Code    | cptcode     |                                                                  |
+| NDC                | Text    | ndc         |                                                                  |
+| Lot number         | Text    | lot         |                                                                  |
+| Quantity           | Integer | qty         |                                                                  |
+| Expiration Date    | Date    | expires_at  |                                                                  |
+| Doctor ID          | Integer | doctorid    |                                                                  |
+| Route Code         | Code    | routecode   | Check `Route` dictionary [link](/docs/dictionary#route)          |
+| Route Name         | Text    | route_name  | The name of the `route` from `Dictionary` (based on `routecode`) |
+| Site Code          | Code    | sitecode    |Check `Site` dictionary [link](/docs/dictionary#site)          |
+| Site Name          | Text    | site_name   | The name of the `site` from `Dictionary` (based on `sitecode`)                                     |
+| Fhir CodingConcept | Json    | fhir_code   | See `fhir_code` [below](#fhir-codeableconcept)             |
+| Provided By        | Code    | provided_by |                                                                  |
+| Client ID          | Integer | clientid    |                                                                  |
 
 ## CareSpan Format V1 - For Managing Records
 
