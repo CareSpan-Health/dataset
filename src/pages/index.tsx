@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Get it in 5min ⏱️
+            📜 Guide to CareSpan Data 🧭
           </Link>
         </div>
       </div>

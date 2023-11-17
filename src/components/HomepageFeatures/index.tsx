@@ -2,50 +2,57 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
+const myImageStyle = {
+  width: "20",
+  height: "20",
+}
+
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  img: any;
+  // Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'CareSpan Data Structure',
+    // Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    img: 'img/carespan-logo-mark.png',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        The description to help build your own parser
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Relied upon dictionary',
+    // Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    img: 'img/carespan-dictionary.png',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        We understand having the description of the data structure is not enough, we also provided the rely upon dictionary.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Contact Us',
+    // Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    img: 'img/carespan-contact.png',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Email to support@carespanhealth.com for any additional information
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, img, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {/* <Svg className={styles.featureSvg} role="img" /> */}
+        <img style={{"height" : "50px", "width" : "50px"}} src={img}></img>
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
