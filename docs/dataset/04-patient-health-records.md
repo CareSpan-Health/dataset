@@ -364,7 +364,6 @@ Used for multiple purposes
 | Date             | Date      | ddate  | When the note was added? |
 | Consultant Notes | Text Area | cnotes |                          |
 
-
 #### Findings
 
 | Name          | Type      | Field      | Description              |
@@ -411,7 +410,31 @@ Used for multiple purposes
 | Private Note Flag          | Integer   | private     |             |
 | User ID                    | Integer   | uid         |             |
 
-## CareSpan Format V1 - For Deleting
+### `017` Assessments: `object`
+
+| Name                            | Type    | Field          | Description                                                                                            |
+| ------------------------------- | ------- | -------------- | ------------------------------------------------------------------------------------------------------ |
+| Assessment ID                   | Integer | assessmentid   | Check `Assessments` dictionary [link](/docs/dictionary#assessments)                                    |
+| Assessment Type                 | Text    | assessmenttype | Check `Assessment Type` dictionary [link](/docs/dictionary#assessment-type)                            |
+| Category (evaluation, template) | Text    | category       | `evaluation`: evaluation in Health Record <br/>`template`: exam templates in the encounter (exam room) |
+| Assessment Reason               | Text    | reason         |                                                                                                        |
+| Prescribing Doctor ID           | Integer | doctorid       | Prescribing user ID - ` ` (empty string) if none                                                                                   |
+| Assessment Report               | Tracing | reportidx      | ID to the actual file                                                                                  |
+| Assessment Answer Set           | Json    | answerset      | What the patient has entered                                                                           |
+| Assessment Result Data          | Json    | json           | Once submitted, the final result is created based on answer set                                        |
+| Assessment Received             | Date    | rdate          |                                                                                                        |
+| Assessment Answer Status        | Code    | answerstatus   | Check `Assessment Answer Statuses` dictionary [link](/docs/dictionary#assessment-answer-statuses)      |
+
+#### Dropped Fields (Assessments)
+
+| Name               | Type           | Field | Description |
+| ------------------ | -------------- | ----- | ----------- |
+| Record Pointer     | Record Pointer | rid   |             |
+| Assessment Ordered | Date           | odate |             |
+| Assessment Date    | Date           | adate |             |
+
+
+## CareSpan Format V1 - For Managing Records
 
 ### `016` Deleted Records: `object`
 

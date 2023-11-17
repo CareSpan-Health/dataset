@@ -1202,6 +1202,100 @@ AND test.`parent_table` is null
 
 ```
 
+## For Assessments (Evaluations/Questionnaires)
+
+### Assessments
+
+| key | type | name                                                             |
+| --- | ---- | ---------------------------------------------------------------- |
+| 2   | 0    | Patient Health Questionnaire (PHQ-9)                             |
+| 3   | 0    | Generalized Anxiety Disorder Assessment (GAD-7)                  |
+| 5   | 1    | COVID-19 Screening-and-Response Program V3                       |
+| 6   | 0    | Geriatric depression scale (GDS)                                 |
+| 7   | 0    | Epworth Sleepiness Scale                                         |
+| 8   | 0    | Mood Disorder Questionnaire                                      |
+| 9   | 0    | MINI Modernized                                                  |
+| 10  | 0    | Mini Health Survey                                               |
+| 11  | 0    | Zung Self-Rating Depression Scale                                |
+| 12  | 0    | CAGE Questionnaire                                               |
+| 13  | 0    | Adult ADHD Self-Report Scale (ASRS-v1.1)                         |
+| 15  | 3    | Patient Health Questionnaire (PHQ-2)                             |
+| 16  | 4    | Humiliation, Afraid, Rape, and Kick Questionnaire [HARK]         |
+| 17  | 5    | Alcohol Use Disorder Identification Test C (AUDIT-C)             |
+| 19  | 5    | DSM-5 Self-Rated Level 1 Cross-Cutting Symptom Measure - Adult   |
+| 23  | 4    | Social Connection Isolation Panel                                |
+| 26  | 3    | Pandemic Effects                                                 |
+| 27  | 8    | Pediatric Symptom Checklist                                      |
+| 28  | 1    | Screening Checklist for Contraindications to Vaccines for Adults |
+| 29  | 1    | Screening Questionnaire for Child and Teen Immunization          |
+| 30  | 8    | Screen for Child Anxiety Related Disorders - Parent              |
+| 31  | 8    | Screen for Child Anxiety Related Disorders - Child               |
+| 32  | 8    | SAD PERSONS                                                      |
+| 33  | 8    | SAD PERSONS - Modified                                           |
+| 34  | 8    | CRIES-13 Parent Version                                          |
+| 35  | 8    | CRIES-8 Revised Child Impact of Events Scale                     |
+| 36  | 8    | CRAFFT Questionnaire                                             |
+| 37  | 8    | Center for Epidemiologic Studies Depression Scale (CES-D)        |
+| 38  | 5    | Clinical Opiate Withdrawal Scale (COWS)                          |
+| 7   | 0    | Epworth-Schläfrigkeitsskala (ESS)                                |
+
+```sql
+-- Table: ref_assessments
+
+SELECT 
+    `assessments_key` as `key`,
+    `type`, 
+    `name`
+FROM `ref_assessments`
+WHERE `active` = 1
+
+```
+
+### Assessment Type
+
+| key | message            |
+| --- | ------------------ |
+| 0   | Behavioral         |
+| 1   | Screening          |
+| 2   | UrgentCare         |
+| 3   | Psychosocial       |
+| 4   | General            |
+| 5   | Tobacco/Alcohol    |
+| 6   | Safety             |
+| 7   | Religious/Cultural |
+| 8   | Pediatric          |
+| 9   | Dosha - Vikruti    |
+| 10  | Intake             |
+| 11  | Dosha - Prakruti   |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 23
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '23') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
+
+### Assessment Answer Statuses
+
+
+| key | message            |
+| --- | ------------------ |
+| 1   | Unknown            |
+| 2   | Declines to Answer |
+
+```sql
+-- Table: ref_dictionaries
+-- dictionary_types_id: 81
+-- dictionary_type: Assessment Answer Statuses
+SELECT `type_key`  as `key`, `label` as `message`
+FROM `ref_dictionaries`
+WHERE (`dictionary_types_id` = '81') AND (`language` = 'en')
+AND `label` <> ''
+ORDER by `key`
+```
 
 
 ## For Review of Systems
@@ -1620,7 +1714,6 @@ WHERE (`dictionary_types_id` = '93') AND (`language` = 'en')
 AND `label` <> ''
 ORDER by `key`
 ```
-
 
 ### No Show Types
 
