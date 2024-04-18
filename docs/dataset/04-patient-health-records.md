@@ -416,7 +416,7 @@ Used for multiple purposes
 | ------------------------------- | ------- | -------------- | ------------------------------------------------------------------------------------------------------ |
 | Assessment ID                   | Integer | assessmentid   | Check `Assessments` dictionary [link](/docs/dictionary#assessments)                                    |
 | Assessment Type                 | Text    | assessmenttype | Check `Assessment Type` dictionary [link](/docs/dictionary#assessment-type)                            |
-| Category (evaluation, template) | Text    | category       | `evaluation`: evaluation in Health Record <br/>`template`: exam templates in the encounter (exam room) |
+| Category (evaluation, template, pros) | Text    | category       | `evaluation`: evaluation in Health Record <br/>`template`: exam templates in the encounter (exam room)<br/>`pros`: patient-reported outcomes used in CarePlan |
 | Assessment Reason               | Text    | reason         |                                                                                                        |
 | Prescribing Doctor ID           | Integer | doctorid       | Prescribing user ID - ` ` (empty string) if none                                                       |
 | Assessment Report               | Tracing | reportidx      | ID to the actual file                                                                                  |
