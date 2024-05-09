@@ -59,6 +59,7 @@ Where `D` is 0, we don't have a defined category. So far, we have the following
 | DCCC013 | Send-print |
 | DCCC014 | Send-download |
 | DCCC015 | Send-sms |
+| DCCC016 | Send-in-app (web) |
 | DCCC101 | Match (i.e. unsolicited, ccda) |
 | DCCC201 | Expand/Drill in |
 | DCCC202 | Review/Verify |
